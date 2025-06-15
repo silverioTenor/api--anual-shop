@@ -1,0 +1,21 @@
+{
+  "name": "api--anual-shop",
+  "version": "1.0.0",
+  "description": "Webserver that provides resources to the frontend",
+  "main": "src/server.ts",
+  "type": "module",
+  "scripts": {
+    "start": "node --loader src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/silverioTenor/api--anual-shop.git"
+  },
+  "author": "Rodrigo Silvério",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-async-errors": "^3.1.1"
+  }
+}
