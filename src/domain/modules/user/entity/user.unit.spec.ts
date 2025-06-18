@@ -18,10 +18,23 @@ describe('Unit tests for User entity', () => {
          _phone: '2199999999',
          _document: '12345678910',
          _password: 'abc123',
+         _address: {},
          _notification: {
             errors: [],
          },
       });
+   });
+
+   it('should throw an error when changing address without props', () => {
+      const user = new UserBuilder()
+                        .withName('Willy Wonka')
+                        .withEmail('willy+test@wonka.com')
+                        .withPhone('2199999999')
+                        .withDocument('12345678910')
+                        .withPassword('abc123')
+                        .build();
+
+      expect(() => user.changeAddress({} as any)).toThrow('Address: user id is required,\nAddress: street is required,\nAddress: city is required,\nAddress: state is required,\nAddress: country is required,\nAddress: postal code is required');
    });
 
    it('should throw an error when creating user without props', () => {

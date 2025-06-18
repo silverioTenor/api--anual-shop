@@ -1,7 +1,9 @@
 import Entity from '../../../@shared/entity/entity.abstract';
 import NotificationError from '../../../@shared/notification/notification.error';
 import UserValidatorFactory from '../factory/user.validator.factory';
+import { IAddress } from '../interface/address.interface';
 import { IUser } from '../interface/user.interface';
+import AddressBuilder from '../value-object/address';
 
 class User extends Entity implements IUser {
    private _name: string;
@@ -9,6 +11,7 @@ class User extends Entity implements IUser {
    private _phone: string;
    private _password: string;
    private _document: string;
+   private _address: IAddress = {} as IAddress;
 
    constructor(
       name: string,
@@ -31,6 +34,7 @@ class User extends Entity implements IUser {
          throw new NotificationError(this.notification.getErrors());
       }
    }
+
    get name(): string {
       return this._name;
    }
@@ -51,6 +55,10 @@ class User extends Entity implements IUser {
       return this._document;
    }
 
+   get address(): IAddress {
+      return this._address;
+   }
+
    private validate() {
       UserValidatorFactory.create().validate(this);
    }
@@ -68,6 +76,17 @@ class User extends Entity implements IUser {
       }
 
       this._email = email;
+   }
+
+   changeAddress(address: IAddress): void {
+      this._address = new AddressBuilder()
+                           .withStreet(address.street)
+                           .withCity(address.city)
+                           .withState(address.state)
+                           .withCountry(address.country)
+                           .withPostalCode(address.postalCode)
+                           .withUserId(this.id)
+                           .build();
    }
 }
 
