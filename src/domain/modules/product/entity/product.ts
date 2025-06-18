@@ -1,13 +1,9 @@
-import crypto from 'node:crypto';
-
 import Entity from '@domain/@shared/entity/entity.abstract';
 import { IProduct } from '../interface/product.interface';
 import ProductValidatorFactory from '../factory/product.validator.factory';
 import NotificationError from '../../../@shared/notification/notification.error';
-import { boolean } from 'yup';
 
 class Product extends Entity implements IProduct {
-   private _id: string;
    private _name: string;
    private _description: string;
    private _oldPrice: number;
@@ -28,8 +24,7 @@ class Product extends Entity implements IProduct {
       categoryId: string,
       id?: string,
    ) {
-      super();
-      this._id = !!id ? id : crypto.randomUUID();
+      super(id);
       this._name = name;
       this._description = description;
       this._oldPrice = oldPrice;
@@ -43,10 +38,6 @@ class Product extends Entity implements IProduct {
       if (this.notification?.hasErrors()) {
          throw new NotificationError(this.notification.getErrors());
       }
-   }
-
-   get id(): string {
-      return this._id;
    }
 
    get name(): string {
@@ -149,7 +140,7 @@ class Product extends Entity implements IProduct {
 
    toString() {
       const product = {
-         id: this._id,
+         id: this.id,
          name: this._name,
          description: this._description,
          oldPrice: this._oldPrice,
