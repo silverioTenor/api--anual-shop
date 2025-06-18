@@ -8,4 +8,6 @@ export interface IUser {
    password: string;
    document: string;
    notification: Notification;
+
+   changeEmail(email: string): void;
 }

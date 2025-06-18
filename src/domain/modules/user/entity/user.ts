@@ -60,7 +60,7 @@ class User extends Entity implements IUser {
 
       if (!regex.test(email)) {
          this.notification.addError({
-            message: 'Email is not valid',
+            message: 'Email must be a valid email address!',
             context: 'user',
          });
 
