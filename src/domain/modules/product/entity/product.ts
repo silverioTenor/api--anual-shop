@@ -3,6 +3,8 @@ import crypto from 'node:crypto';
 import Entity from '@domain/@shared/entity/entity.abstract';
 import { IProduct } from '../interface/product.interface';
 import ProductValidatorFactory from '../factory/product.validator.factory';
+import NotificationError from '../../../@shared/notification/notification.error';
+import { boolean } from 'yup';
 
 class Product extends Entity implements IProduct {
    private _id: string;
@@ -11,8 +13,9 @@ class Product extends Entity implements IProduct {
    private _oldPrice: number;
    private _price: number;
    private _quantity: number;
-   private _userId: string;
-   private _categoryId: string;
+   private _active: boolean;
+   private _userId?: string;
+   private _categoryId?: string;
 
    constructor(
       name: string,
@@ -20,6 +23,7 @@ class Product extends Entity implements IProduct {
       oldPrice: number,
       price: number,
       quantity: number,
+      active: boolean,
       userId: string,
       categoryId: string,
       id?: string,
@@ -31,9 +35,14 @@ class Product extends Entity implements IProduct {
       this._oldPrice = oldPrice;
       this._price = price;
       this._quantity = quantity;
+      this._active = active;
       this._userId = userId;
       this._categoryId = categoryId;
       this.validate();
+
+      if (this.notification?.hasErrors()) {
+         throw new NotificationError(this.notification.getErrors());
+      }
    }
 
    get id(): string {
@@ -60,12 +69,16 @@ class Product extends Entity implements IProduct {
       return this._quantity;
    }
 
+   get active() {
+      return this._active;
+   }
+
    get userId(): string {
-      return this._userId;
+      return this._userId || '';
    }
 
    get categoryId(): string {
-      return this._categoryId;
+      return this._categoryId || '';
    }
 
    private validate() {
@@ -74,8 +87,79 @@ class Product extends Entity implements IProduct {
 
    changePrice(price: number) {
       if (price <= 0) {
-         throw new Error('Price must be greater than zero');
+         this.notification?.addError({
+            context: 'Product',
+            message: 'Price must be greater than zero',
+         });
+
+         throw new NotificationError(this.notification.getErrors());
       }
+
+      this._oldPrice = this._price;
+      this._price = price;
+   }
+
+   changeQuantity(quantity: number): void {
+      if (quantity < 0) {
+         this.notification?.addError({
+            context: 'Product',
+            message: 'Quantity must be greater than or equal to zero',
+         });
+
+         throw new NotificationError(this.notification.getErrors());
+      }
+
+      this._quantity = quantity;
+   }
+
+   activate() {
+      if (this._price <= 0 || this._quantity <= 0) {
+         this.notification?.addError({
+            context: 'Product',
+            message: 'Cannot activate product with price or quantity less than or equal to zero',
+         });
+
+         throw new NotificationError(this.notification.getErrors());
+      }
+
+      if (this._active) {
+         this.notification?.addError({
+            context: 'Product',
+            message: 'Product is already active',
+         });
+
+         throw new NotificationError(this.notification.getErrors());
+      }
+
+      this._active = true;
+   }
+
+   deactivate() {
+      if (!this._active) {
+         this.notification?.addError({
+            context: 'Product',
+            message: 'Product is already inactive',
+         });
+
+         throw new NotificationError(this.notification.getErrors());
+      }
+
+      this._active = false;
+   }
+
+   toString() {
+      const product = {
+         id: this._id,
+         name: this._name,
+         description: this._description,
+         oldPrice: this._oldPrice,
+         price: this._price,
+         quantity: this._quantity,
+         userId: this._userId,
+         categoryId: this._categoryId,
+      }
+      
+      return JSON.stringify(product, null, 3);
    }
 }
 
@@ -85,6 +169,7 @@ export default class ProductBuilder {
    private _oldPrice: number;
    private _price: number;
    private _quantity: number;
+   private _active: boolean;
    private _userId: string;
    private _categoryId: string;
 
@@ -94,6 +179,7 @@ export default class ProductBuilder {
       this._oldPrice = 0;
       this._price = 0;
       this._quantity = 0;
+      this._active = false;
       this._userId = '';
       this._categoryId = '';
    }
@@ -105,11 +191,6 @@ export default class ProductBuilder {
 
    withDescription(description: string): ProductBuilder {
       this._description = description;
-      return this;
-   }
-
-   withOldPrice(oldPrice: number): ProductBuilder {
-      this._oldPrice = oldPrice;
       return this;
    }
 
@@ -133,16 +214,19 @@ export default class ProductBuilder {
       return this;
    }
 
-   build(id?: string): Product {
-      return new Product(
+   build(id?: string): IProduct {
+      const product = new Product(
          this._name,
          this._description,
          this._oldPrice,
          this._price,
          this._quantity,
+         this._active,
          this._userId,
          this._categoryId,
          id,
       );
+
+      return product;
    }
 }
