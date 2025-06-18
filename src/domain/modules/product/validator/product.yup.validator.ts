@@ -8,7 +8,7 @@ export default class ProductYupValidator implements IValidator<IProduct> {
       try {
          yup.object()
             .shape({
-               id: yup.string().required('ID is required!').uuid('ID must be a valid UUID'),
+               id: yup.string().optional(),
                name: yup.string().required('Name is required!').min(3).max(255),
                description: yup.string().required('Description is required!').min(3).max(1000),
                price: yup.number().required('Price is required!').positive().min(1),
