@@ -5,7 +5,7 @@ export interface ICreditCard {
    number: string;
    holder: string;
    expiryDate: string;
-   cvv: number;
+   cvv: string;
    active: boolean;
    userId: string;
    notification: Notification;

@@ -16,7 +16,7 @@ export default class CreditCardYupValidator implements IValidator<ICreditCard> {
                   .string()
                   .required('expiryDate is required')
                   .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, { message: 'Date invalid!' }),
-               cvv: yup.string().required('CVV is required'),
+               cvv: yup.string().required('CVV is required').length(3),
             })
             .validateSync(
                {

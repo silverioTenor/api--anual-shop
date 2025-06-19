@@ -7,7 +7,7 @@ class CreditCard extends Entity implements ICreditCard {
    private _number: string;
    private _holder: string;
    private _expiryDate: string;
-   private _cvv: number;
+   private _cvv: string;
    private _active: boolean;
    private _userId: string;
 
@@ -15,7 +15,7 @@ class CreditCard extends Entity implements ICreditCard {
       number: string,
       holder: string,
       expiryDate: string,
-      cvv: number,
+      cvv: string,
       active: boolean,
       userId: string,
       id?: string,
@@ -93,7 +93,7 @@ export default class CreditCardBuilder {
    private _number: string;
    private _holder: string;
    private _expiryDate: string;
-   private _cvv: number;
+   private _cvv: string;
    private _active: boolean;
    private _userId: string;
 
@@ -101,7 +101,7 @@ export default class CreditCardBuilder {
       this._number = '';
       this._holder = '';
       this._expiryDate = '';
-      this._cvv = 0;
+      this._cvv = '';
       this._active = false;
       this._userId = '';
    }
@@ -121,7 +121,7 @@ export default class CreditCardBuilder {
       return this;
    }
 
-   withCVV(cvv: number): CreditCardBuilder {
+   withCVV(cvv: string): CreditCardBuilder {
       this._cvv = cvv;
       return this;
    }
