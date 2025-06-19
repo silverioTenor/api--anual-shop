@@ -1,9 +1,9 @@
-import Entity from "../../../@shared/entity/entity.abstract";
 import NotificationError from "../../../@shared/notification/notification.error";
+import ValueObject from "../../../@shared/value-object/entity.abstract";
 import AddressValidatorFactory from "../factory/address.validator.factory";
 import { IAddress } from "../interface/address.interface";
 
-class Address extends Entity implements IAddress {
+class Address extends ValueObject implements IAddress {
    private _userId: string;
    private _street: string;
    private _city: string;
@@ -18,9 +18,8 @@ class Address extends Entity implements IAddress {
       state: string,
       country: string,
       postalCode: string,
-      id?: string
    ) {
-      super(id);
+      super();
       this._userId = userId;
       this._street = street;
       this._city = city;
@@ -110,7 +109,7 @@ export default class AddressBuilder {
       return this;
    }
 
-   build(id?: string): Address {
+   build(): Address {
       return new Address(
          this._userId,
          this._street,
@@ -118,7 +117,6 @@ export default class AddressBuilder {
          this._state,
          this._country,
          this._postalCode,
-         id
       );
    }
 }

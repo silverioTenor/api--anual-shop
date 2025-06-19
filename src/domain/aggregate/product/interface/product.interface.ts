@@ -1,7 +1,7 @@
 import Notification from "../../../@shared/notification/notification";
 
 export interface IProduct {
-   id?: string;
+   id: string;
    name: string;
    description: string;
    oldPrice: number;

@@ -13,7 +13,6 @@ describe('Unit tests for Address', () => {
 
       expect(address).toBeDefined();
       expect(address).toEqual({
-         _id: expect.any(String),
          _userId: expect.any(String),
          _street: 'street',
          _city: 'city',
