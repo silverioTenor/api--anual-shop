@@ -11,7 +11,6 @@ describe('Unit tests for Order Item', () => {
 
       expect(orderItem).toBeDefined();
       expect(orderItem).toEqual({
-         _id: expect.any(String),
          _productId: expect.any(String),
          _productName: 'Product 1',
          _price: 100,

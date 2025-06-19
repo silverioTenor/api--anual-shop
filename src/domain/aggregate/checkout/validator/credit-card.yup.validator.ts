@@ -8,7 +8,6 @@ export default class CreditCardYupValidator implements IValidator<ICreditCard> {
       try {
          yup.object()
             .shape({
-               id: yup.string().optional(),
                userId: yup.string().required('User ID is required!'),
                number: yup.string().required('Number is required!').length(16),
                holder: yup.string().required('Holder is required!'),
@@ -20,7 +19,6 @@ export default class CreditCardYupValidator implements IValidator<ICreditCard> {
             })
             .validateSync(
                {
-                  id: entity.id,
                   userId: entity.userId,
                   number: entity.number,
                   holder: entity.holder,

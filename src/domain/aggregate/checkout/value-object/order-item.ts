@@ -1,9 +1,9 @@
-import Entity from '../../../@shared/entity/entity.abstract';
 import NotificationError from '../../../@shared/notification/notification.error';
+import ValueObject from '../../../@shared/value-object/entity.abstract';
 import OrderItemValidatorFactory from '../factory/order-item.validator.factory';
 import { IOrderItem } from '../interface/order-item.interface';
 
-class OrderItem extends Entity implements IOrderItem {
+class OrderItem extends ValueObject implements IOrderItem {
    private _productId: string;
    private _productName: string;
    private _price: number;
@@ -14,9 +14,8 @@ class OrderItem extends Entity implements IOrderItem {
       productName: string,
       price: number,
       quantity: number,
-      id?: string,
    ) {
-      super(id);
+      super();
       this._productId = productId;
       this._productName = productName;
       this._price = price;
@@ -86,13 +85,12 @@ export default class OrderItemBuilder {
       return this;
    }
 
-   build(id?: string) {
+   build(): IOrderItem {
       return new OrderItem(
          this._productId,
          this._productName,
          this._price,
          this._quantity,
-         id
       );
    }
 }

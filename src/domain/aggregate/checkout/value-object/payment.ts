@@ -1,10 +1,10 @@
 import NotificationError from '../../../@shared/notification/notification.error';
-import ObjectValue from '../../../@shared/object-value/entity.abstract';
+import ValueObject from '../../../@shared/value-object/entity.abstract';
 import { PaymentStatus } from '../enum/payment.enum';
 import PaymentValidatorFactory from '../factory/payment.validator.factory';
 import { IPayment, IPaymentMethod } from '../interface/payment.interface';
 
-class Payment extends ObjectValue implements IPayment {
+class Payment extends ValueObject implements IPayment {
    private _orderId: string;
    private _method: IPaymentMethod;
    private _status: PaymentStatus;

@@ -1,9 +1,9 @@
-import Entity from '../../../@shared/entity/entity.abstract';
 import NotificationError from '../../../@shared/notification/notification.error';
+import ValueObject from '../../../@shared/value-object/entity.abstract';
 import CreditCardValidatorFactory from '../factory/credit-card.validator.factory';
 import { ICreditCard } from '../interface/credit-card.interface';
 
-class CreditCard extends Entity implements ICreditCard {
+class CreditCard extends ValueObject implements ICreditCard {
    private _number: string;
    private _holder: string;
    private _expiryDate: string;
@@ -18,9 +18,8 @@ class CreditCard extends Entity implements ICreditCard {
       cvv: string,
       active: boolean,
       userId: string,
-      id?: string,
    ) {
-      super(id);
+      super();
       this._number = number;
       this._holder = holder;
       this._expiryDate = expiryDate;
@@ -131,15 +130,14 @@ export default class CreditCardBuilder {
       return this;
    }
 
-   build(id?: string): ICreditCard {
+   build(): ICreditCard {
       return new CreditCard(
          this._number,
          this._holder,
          this._expiryDate,
          this._cvv,
          this._active,
-         this._userId,
-         id,
+         this._userId
       );
    }
 }

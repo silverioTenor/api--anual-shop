@@ -12,7 +12,6 @@ describe('Unit tests for CreditCard', () => {
 
       expect(creditCard).toBeDefined();
       expect(creditCard).toEqual({
-         _id: expect.any(String),
          _number: '4000000000000010',
          _holder: 'William J. K.',
          _expiryDate: '12/28',

@@ -1,7 +1,6 @@
 import Notification from "../../../@shared/notification/notification";
 
 export interface ICreditCard {
-   id?: string;
    number: string;
    holder: string;
    expiryDate: string;

@@ -8,7 +8,6 @@ export default class OrderItemYupValidator implements IValidator<IOrderItem> {
       try {
          yup.object()
             .shape({
-               id: yup.string().optional(),
                productId: yup.string().required('Produc ID is required!'),
                productName: yup.string().required('Product name is required!'),
                price: yup.number().required('price is required').min(1, 'Price must be greater than 0!'),
@@ -16,7 +15,6 @@ export default class OrderItemYupValidator implements IValidator<IOrderItem> {
             })
             .validateSync(
                {
-                  id: entity.id,
                   productId: entity.productId,
                   productName: entity.productName,
                   price: entity.price,

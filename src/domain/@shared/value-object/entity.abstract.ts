@@ -1,6 +1,6 @@
 import Notification from "../notification/notification";
 
-export default abstract class ObjectValue {
+export default abstract class ValueObject {
 
    private _notification: Notification;
 
