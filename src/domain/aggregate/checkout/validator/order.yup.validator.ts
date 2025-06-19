@@ -1,21 +1,21 @@
 import * as yup from 'yup';
-import IValidator from '../../../@shared/validator/validator.interface';
-import { IPayment } from '../interface/payment.interface';
 
-export default class PaymentYupValidator implements IValidator<IPayment> {
-   validate(entity: IPayment) {
+import IValidator from '@domain/@shared/validator/validator.interface';
+import { IOrder } from '../interface/order.interface';
+
+export default class OrderYupValidator implements IValidator<IOrder> {
+   validate(entity: IOrder) {
       try {
          yup.object()
             .shape({
-               orderId: yup
-                  .string()
-                  .required('User ID is required!')
-                  .uuid('Order ID must be an UUID'),
+               id: yup.string().optional(),
+               userId: yup.string().required('User ID is required!').uuid('Field must be an UUID!'),
                status: yup.string().required('Status is required!'),
             })
             .validateSync(
                {
-                  orderId: entity.orderId,
+                  id: entity.id,
+                  userId: entity.userId,
                   status: entity.status,
                },
                { abortEarly: false },
@@ -25,7 +25,7 @@ export default class PaymentYupValidator implements IValidator<IPayment> {
 
          e.errors.forEach(error => {
             entity.notification.addError({
-               context: 'Payment',
+               context: 'Order',
                message: error,
             });
          });

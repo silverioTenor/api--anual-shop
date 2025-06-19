@@ -32,6 +32,6 @@ describe('Unit tests for Payment', () => {
    });
 
    it('should throw an error when creating a new payment without props', () => {
-      expect(() => new PaymentBuilder().build()).toThrow('Payment: user id is required!,\nPayment: status is required!');
+      expect(() => new PaymentBuilder().build()).toThrow('Payment: user id is required!,\nPayment: order id must be an uuid,\nPayment: status is required!');
    });
 });

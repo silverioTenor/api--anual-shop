@@ -1,21 +1,25 @@
+import Entity from '../../../@shared/entity/entity.abstract';
 import NotificationError from '../../../@shared/notification/notification.error';
-import ValueObject from '../../../@shared/value-object/entity.abstract';
 import OrderItemValidatorFactory from '../factory/order-item.validator.factory';
 import { IOrderItem } from '../interface/order-item.interface';
 
-class OrderItem extends ValueObject implements IOrderItem {
+class OrderItem extends Entity implements IOrderItem {
+   private _orderId: string;
    private _productId: string;
    private _productName: string;
    private _price: number;
    private _quantity: number;
 
    constructor(
+      orderId: string,
       productId: string,
       productName: string,
       price: number,
       quantity: number,
+      id?: string,
    ) {
-      super();
+      super(id);
+      this._orderId = orderId;
       this._productId = productId;
       this._productName = productName;
       this._price = price;
@@ -25,6 +29,10 @@ class OrderItem extends ValueObject implements IOrderItem {
       if (this.notification.hasErrors()) {
          throw new NotificationError(this.notification.getErrors());
       }
+   }
+
+   get orderId() {
+      return this._orderId;
    }
 
    get productId() {
@@ -53,16 +61,23 @@ class OrderItem extends ValueObject implements IOrderItem {
 }
 
 export default class OrderItemBuilder {
+   private _orderId: string;
    private _productId: string;
    private _productName: string;
    private _price: number;
    private _quantity: number;
 
    constructor() {
+      this._orderId = '';
       this._productId = '';
       this._productName = '';
       this._price = 0;
       this._quantity = 0;
+   }
+
+   withOrderId(orderId: string) {
+      this._orderId = orderId;
+      return this;
    }
 
    withProductId(productId: string) {
@@ -85,12 +100,14 @@ export default class OrderItemBuilder {
       return this;
    }
 
-   build(): IOrderItem {
+   build(id?: string): IOrderItem {
       return new OrderItem(
+         this._orderId,
          this._productId,
          this._productName,
          this._price,
          this._quantity,
+         id
       );
    }
 }
