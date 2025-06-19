@@ -51,6 +51,19 @@ class OrderItem extends Entity implements IOrderItem {
       return this._quantity;
    }
 
+   changeQuantity(quantity: number): void {
+      if (quantity <= 0) {
+         this.notification.addError({
+            context: 'OrderItem',
+            message: 'Unable to reset item quantity!'
+         });
+
+         throw new NotificationError(this.notification.getErrors());
+      }
+
+      this._quantity = quantity;
+   }
+
    total(): number {
       return this._price * this._quantity;
    }

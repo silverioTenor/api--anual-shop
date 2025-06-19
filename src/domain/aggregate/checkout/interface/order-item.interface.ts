@@ -9,5 +9,6 @@ export interface IOrderItem {
    quantity: number;
    notification: Notification;
 
+   changeQuantity(quantity: number): void;
    total(): number;
 }
