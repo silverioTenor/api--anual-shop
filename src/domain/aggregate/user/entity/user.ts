@@ -11,7 +11,7 @@ class User extends Entity implements IUser {
    private _phone: string;
    private _password: string;
    private _document: string;
-   private _address: IAddress = {} as IAddress;
+   private _address!: IAddress | null;
 
    constructor(
       name: string,
@@ -27,6 +27,7 @@ class User extends Entity implements IUser {
       this._phone = phone;
       this._password = password;
       this._document = document;
+      this._address = null;
 
       this.validate();
 
@@ -55,7 +56,7 @@ class User extends Entity implements IUser {
       return this._document;
    }
 
-   get address(): IAddress {
+   get address(): IAddress | null {
       return this._address;
    }
 
@@ -79,13 +80,15 @@ class User extends Entity implements IUser {
    }
 
    changeAddress(address: IAddress): void {
+      const userId = address.userId || this.id;
+
       this._address = new AddressBuilder()
                            .withStreet(address.street)
                            .withCity(address.city)
                            .withState(address.state)
                            .withCountry(address.country)
                            .withPostalCode(address.postalCode)
-                           .withUserId(this.id)
+                           .withUserId(userId)
                            .build();
    }
 }

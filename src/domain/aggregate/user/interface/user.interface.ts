@@ -9,7 +9,7 @@ export interface IUser {
    password: string;
    document: string;
    notification: Notification;
-   address: IAddress;
+   address: IAddress | null;
 
    changeEmail(email: string): void;
    changeAddress(addres: IAddress): void;

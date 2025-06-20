@@ -18,7 +18,7 @@ describe('Unit tests for User entity', () => {
          _phone: '2199999999',
          _document: '12345678910',
          _password: 'abc123',
-         _address: {},
+         _address: null,
          _notification: {
             errors: [],
          },
