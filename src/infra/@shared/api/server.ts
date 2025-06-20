@@ -1,8 +1,7 @@
-import 'express-async-errors';
-import express from 'express';
+import dotenv from 'dotenv';
+import { app } from './express';
 
-export const app = express();
-app.use(express.json());
+dotenv.config();
 
 const port = Number(process.env.PORT) || 3000;
 
