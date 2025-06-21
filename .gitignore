@@ -5,3 +5,4 @@ coverage
 .env
 .swc
 .docker
+src/infra/@shared/db/client

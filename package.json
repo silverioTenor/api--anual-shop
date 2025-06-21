@@ -8,7 +8,10 @@
     "test": "jest",
     "test:check-types": "clear && npm run tsc -- --noEmit && jest",
     "tsc": "tsc",
-    "clear": "rm -rf dist"
+    "clear": "rm -rf dist",
+    "prisma:generate": "prisma generate --schema=./src/infra/@shared/db/prisma/schema.prisma",
+    "prisma:migrate": "prisma migrate dev --schema=./src/infra/@shared/db/prisma/schema.prisma",
+    "prisma:studio": "prisma studio --schema=./src/infra/@shared/db/prisma/schema.prisma"
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,7 @@
   "author": "Rodrigo Silvério",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^6.10.1",
     "dotenv": "^16.5.0",
     "express": "^4.21.2",
     "express-async-errors": "^3.1.1",
@@ -28,10 +32,13 @@
     "@swc/jest": "^0.2.38",
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.3",
     "jest": "^30.0.0",
+    "prisma": "^6.10.1",
     "ts-jest": "^29.4.0",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   }
 }
