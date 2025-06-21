@@ -28,6 +28,8 @@ model Users {
   address   Address?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("users")
 }
 
 model Address {
@@ -39,4 +41,6 @@ model Address {
   userId     String   @unique
   user       Users    @relation(fields: [userId], references: [id])
   createdAt  DateTime @default(now())
+
+  @@map("address")
 }
