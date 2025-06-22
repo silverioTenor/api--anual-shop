@@ -1,0 +1,13 @@
+services:
+
+  db-postgres-test:
+    image: postgres:17
+    container_name: db-postgres-test
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=postgres
+    tmpfs:
+      - /var/lib/postgresql/data
