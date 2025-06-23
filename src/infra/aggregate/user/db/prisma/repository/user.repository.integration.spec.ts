@@ -1,4 +1,4 @@
-import { prisma } from '@infra/@shared/db/prisma/test/jest.setup';
+import { prisma } from '@infra/@shared/db/prisma/main';
 
 describe('Integration tests for user repository', () => {
    test('should create an user', async () => {

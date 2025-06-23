@@ -1,4 +1,4 @@
-import { prisma } from "@infra/@shared/db/prisma/client";
+import { prisma } from "@infra/@shared/db/prisma/main";
 
 // export const UserModel = prisma.user;
 
