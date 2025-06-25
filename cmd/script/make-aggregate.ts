@@ -1,8 +1,6 @@
-import fs from 'node:fs';
-import path from 'node:path';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
-import Generate from './generate.util';
+import Generate from '../util/generator';
 
 export default abstract class MakeAggregate {
    static async run(name: string) {
@@ -29,12 +27,35 @@ export default abstract class MakeAggregate {
             },
          ]);
 
+         const { useOrm } = await inquirer.prompt([
+            {
+               type: 'confirm',
+               name: 'useOrm',
+               message: 'Are you going to use any ORM?',
+               default: true,
+            },
+         ]);
+
+         let ormName = '';
+
+         if (useOrm) {
+            const { orm } = await inquirer.prompt([
+               {
+                  type: 'input',
+                  name: 'orm',
+                  message: 'Insert the ORM name',
+               },
+            ]);
+
+            ormName = orm;
+         }
+
          switch (dirLocation) {
             case 'domain':
-               Generate.genDomainAggregate(aggregate);
+               await Generate.genDomainAggregate(aggregate);
                break;
             case 'infra':
-               Generate.genInfraAggregate(aggregate);
+               await Generate.genInfraAggregate(aggregate, ormName);
                break;
             default:
                console.log('🚩 Invalid option!');

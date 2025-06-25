@@ -1,7 +1,5 @@
-#!/usr/bin/env ts-node
-
 import { Command } from 'commander';
-import MakeAggregate from './scripts/make-aggregate';
+import MakeAggregate from './script/make-aggregate';
 
 const program = new Command();
 
@@ -16,7 +14,7 @@ program
   .argument('<name>', 'Aggregate name')
   .action((name) => MakeAggregate.run(name));
 
-// 🚧 Futuro: comandos adicionais podem ser adicionados aqui
+// 🚧 TODO: usecase
 // program.command('make:usecase').action(...)
 
 program.parse();
