@@ -1,3 +1,4 @@
+import * as bcrypt from 'bcrypt';
 import UserBuilder from './user';
 
 describe('Unit tests for User entity', () => {
@@ -65,5 +66,37 @@ describe('Unit tests for User entity', () => {
 
          user.changeEmail('willY@+test@wonka.com');
       }).toThrow('email must be a valid email address!');
+   });
+
+   it('should change password', () => {
+      const user = new UserBuilder()
+                  .withName('Willy Wonka')
+                  .withEmail('willy+test@wonka.com')
+                  .withPhone('2199999999')
+                  .withDocument('12345678910')
+                  .withPassword('abc123')
+                  .build();
+
+      user.changePassword('123abc');
+
+      let passwordMatch = bcrypt.compareSync('abc123', user.password);
+      expect(passwordMatch).toBe(false);
+
+      passwordMatch = bcrypt.compareSync('123abc', user.password);
+      expect(passwordMatch).toBe(true);
+   });
+
+   it('should throw an error when change password with invalid length', () => {
+      expect(() => {
+         const user = new UserBuilder()
+                     .withName('Willy Wonka')
+                     .withEmail('willy+test@wonka.com')
+                     .withPhone('2199999999')
+                     .withDocument('12345678910')
+                     .withPassword('abc123')
+                     .build();
+
+         user.changePassword('123');
+      }).toThrow('User: invalid password length!');
    });
 });

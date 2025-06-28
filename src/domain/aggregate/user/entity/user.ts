@@ -1,3 +1,4 @@
+import * as bcrypt from 'bcrypt';
 import Entity from '../../../@shared/entity/entity.abstract';
 import NotificationError from '../../../@shared/notification/notification.error';
 import UserValidatorFactory from '../factory/user.validator.factory';
@@ -64,7 +65,7 @@ class User extends Entity implements IUser {
       UserValidatorFactory.create().validate(this);
    }
 
-   changeEmail(email: string) {
+   changeEmail(email: string): void {
       const regex = new RegExp(/^[A-Za-z0-9]+([._+-]?[A-Za-z0-9]+)*@[a-z]+(\.[a-z]+)+$/);
 
       if (!regex.test(email)) {
@@ -90,6 +91,21 @@ class User extends Entity implements IUser {
                            .withPostalCode(address.postalCode)
                            .withUserId(userId)
                            .build();
+   }
+
+   changePassword(password: string): void {
+      if (password.length < 5 || password.length > 20) {
+         this.notification.addError({
+            context: 'User',
+            message: 'Invalid password length!',
+         });
+
+         throw new NotificationError(this.notification.getErrors());
+      }
+
+      const passwordHashed = bcrypt.hashSync(password, 10);
+
+      this._password = passwordHashed;
    }
 }
 

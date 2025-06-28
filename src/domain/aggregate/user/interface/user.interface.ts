@@ -13,6 +13,7 @@ export interface IUser {
 
    changeEmail(email: string): void;
    changeAddress(addres: IAddress): void;
+   changePassword(password: string): void;
 }
 
 export interface IUserDB {

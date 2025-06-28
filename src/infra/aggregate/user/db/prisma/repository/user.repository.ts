@@ -45,6 +45,20 @@ export default class UserRepository implements IUserDBRepository {
          : null;
    }
 
+   async findByDocument(document: string): Promise<IUserDB | null> {
+      const result = await UserModel.db.findUnique({
+         where: { document },
+         include: { address: true },
+      });
+
+      return result?.id
+         ? {
+              ...result,
+              address: result?.address ?? undefined,
+           }
+         : null;
+   }
+
    async saveAddress(address: IAddress): Promise<void> {
       await AddressModel.db.upsert({
          where: { userId: address.userId },

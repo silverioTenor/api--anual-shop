@@ -17,7 +17,7 @@ export default class UserYupValidator implements IValidator<IUser> {
                      message: 'Email must be a valid email address!',
                   }),
                phone: yup.string().required('Phone is required!').min(9).max(11),
-               password: yup.string().required('Password is required!').min(6).max(255),
+               password: yup.string().required('Password is required!').min(6).max(20),
                document: yup.string().required('Document is required!').min(11).max(14),
             })
             .validateSync(
