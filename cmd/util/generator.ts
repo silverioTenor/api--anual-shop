@@ -4,14 +4,14 @@ import path from 'node:path';
 import Formatter from './formatter';
 
 export default abstract class Generator {
-   static createDirectory(dirPath: string) {
+   private static createDirectory(dirPath: string) {
       if (!fs.existsSync(dirPath)) {
          fs.mkdirSync(dirPath, { recursive: true });
          console.log(chalk.green(`✔ Directory "${dirPath}" was created!`));
       }
    }
 
-   static createFile(filePath: string, content = '') {
+   private static createFile(filePath: string, content = '') {
       if (!fs.existsSync(filePath)) {
          fs.writeFileSync(filePath, content);
          console.log(chalk.cyan(`✔ File "${filePath}" was created!`));
@@ -160,6 +160,49 @@ export default abstract class Generator {
                }
             }
          }
+      }
+   }
+
+   static async genUseCase(useCaseName: string) {
+      const className = useCaseName.charAt(0).toUpperCase() + useCaseName.slice(1);
+      const useCasePath = path.resolve('src', 'usecase', useCaseName);
+      const directories = ['create', 'find', 'update', 'list'];
+      const fileTypeList = ['dto', 'integration', 'unit', 'usecase'];
+
+      for (let dirName of directories) {
+         const dirPath = path.join(useCasePath, dirName);
+
+         this.createDirectory(dirPath);
+
+         fileTypeList.map(async (fileType: string) => {
+            let filePath = path.join(dirPath, `${dirName}.${useCaseName}.${fileType}.ts`);
+            let content = '';
+
+            if (fileType === 'integration' || fileType === 'unit') {
+               filePath = path.join(dirPath, `${dirName}.${useCaseName}.${fileType}.spec.ts`);
+               const testType = fileType.charAt(0).toUpperCase() + fileType.slice(1);
+
+               content = `describe('${testType} test for ${className}', () => {it('should calc value', () => {expect(1+1).toBe(2)});});`;
+
+               content = await Formatter.execute(content);
+               this.createFile(filePath, content);
+            }
+
+            dirName = dirName.charAt(0).toUpperCase() + dirName.slice(1);
+
+            switch (fileType) {
+               case 'dto':
+                  content = `export interface Input${dirName}${className}DTO {} export interface Output${dirName}${className}DTO {}`;
+                  break;
+               case 'usecase':
+                  content = `export default class ${dirName}${className}UseCase {}`;
+                  break;
+               default:
+            }
+
+            content = await Formatter.execute(content);
+            this.createFile(filePath, content);
+         });
       }
    }
 }
