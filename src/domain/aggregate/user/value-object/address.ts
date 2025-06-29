@@ -1,3 +1,4 @@
+import { AutoMap } from '@automapper/classes';
 import NotificationError from "../../../@shared/notification/notification.error";
 import ValueObject from "../../../@shared/value-object/entity.abstract";
 import AddressValidatorFactory from "../factory/address.validator.factory";
@@ -33,26 +34,32 @@ class Address extends ValueObject implements IAddress {
       }
    }
 
+   @AutoMap()
    get userId() {
       return this._userId;
    }
 
+   @AutoMap()
    get street() {
       return this._street;
    }
 
+   @AutoMap()
    get city() {
       return this._city;
    }
 
+   @AutoMap()
    get state() {
       return this._state;
    }
 
+   @AutoMap()
    get country() {
       return this._country;
    }
 
+   @AutoMap()
    get postalCode() {
       return this._postalCode;
    }

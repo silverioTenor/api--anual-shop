@@ -1,3 +1,4 @@
+import { AutoMap } from '@automapper/classes';
 import * as bcrypt from 'bcrypt';
 import Entity from '../../../@shared/entity/entity.abstract';
 import NotificationError from '../../../@shared/notification/notification.error';
@@ -6,7 +7,7 @@ import { IAddress } from '../interface/address.interface';
 import { IUser } from '../interface/user.interface';
 import AddressBuilder from '../value-object/address';
 
-class User extends Entity implements IUser {
+export class User extends Entity implements IUser {
    private _name: string;
    private _email: string;
    private _phone: string;
@@ -37,14 +38,17 @@ class User extends Entity implements IUser {
       }
    }
 
+   @AutoMap()
    get name(): string {
       return this._name;
    }
 
+   @AutoMap()
    get email(): string {
       return this._email;
    }
 
+   @AutoMap()
    get phone(): string {
       return this._phone;
    }
@@ -53,10 +57,12 @@ class User extends Entity implements IUser {
       return this._password;
    }
 
+   @AutoMap()
    get document(): string {
       return this._document;
    }
 
+   @AutoMap()
    get address(): IAddress | null {
       return this._address;
    }
@@ -109,7 +115,7 @@ class User extends Entity implements IUser {
    }
 }
 
-export default class UserBuilder {
+export class UserBuilder {
    private _name: string;
    private _email: string;
    private _phone: string;

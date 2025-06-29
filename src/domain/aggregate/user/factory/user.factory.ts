@@ -1,4 +1,4 @@
-import UserBuilder from "../entity/user";
+import { UserBuilder } from "../entity/user";
 import { IUser } from "../interface/user.interface";
 
 export default class UserFactory {
@@ -14,6 +14,8 @@ export default class UserFactory {
                         .withPhone(payload?.phone)
                         .withPassword(payload?.password)
                         .build(payload?.id);
+
+      user.changePassword(payload?.password);
 
       if (payload?.address) {
          user.changeAddress(payload?.address);

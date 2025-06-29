@@ -18,7 +18,7 @@ describe('Unit tests for user factory', () => {
          _name: 'William Joker',
          _email: 'will.j@gmail.com',
          _phone: '21999999999',
-         _password: 'abc123',
+         _password: expect.any(String),
          _document: '12345678910',
          _address: null,
          _notification: {
@@ -52,7 +52,7 @@ describe('Unit tests for user factory', () => {
          _name: 'William Joker',
          _email: 'will.j@gmail.com',
          _phone: '21999999999',
-         _password: 'abc123',
+         _password: expect.any(String),
          _document: '12345678910',
          _address: {
             _userId: expect.any(String),

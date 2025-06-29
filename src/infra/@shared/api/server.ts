@@ -1,8 +1,13 @@
+import 'reflect-metadata';
+
 import dotenv from 'dotenv';
 import { app } from './express';
 import { config } from '../config/config';
+import MapperRegistry from '../config/mapper/profile-registry.mapper';
 
 dotenv.config();
+
+MapperRegistry.registerMapping();
 
 const port = Number(config.app.port);
 

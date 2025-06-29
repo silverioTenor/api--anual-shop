@@ -1,4 +1,11 @@
+import 'reflect-metadata';
+
+import MapperRegistry from '@infra/@shared/config/mapper/profile-registry.mapper';
 import { prisma } from '../client';
+
+beforeAll(() => {
+   MapperRegistry.registerMapping();
+})
 
 afterEach(async () => {
    await prisma.$executeRawUnsafe(

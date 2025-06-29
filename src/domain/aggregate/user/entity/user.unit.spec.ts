@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcrypt';
-import UserBuilder from './user';
+import { UserBuilder } from './user';
 
 describe('Unit tests for User entity', () => {
    it('should create an user', () => {
@@ -18,7 +18,7 @@ describe('Unit tests for User entity', () => {
          _email: 'willy+test@wonka.com',
          _phone: '2199999999',
          _document: '12345678910',
-         _password: 'abc123',
+         _password: expect.any(String),
          _address: null,
          _notification: {
             errors: [],

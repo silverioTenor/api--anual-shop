@@ -2,7 +2,7 @@ import Notification from "../../../@shared/notification/notification";
 import { IAddress, IAddressDB } from "./address.interface";
 
 export interface IUser {
-   id: string;
+   id?: string;
    name: string;
    email: string;
    phone: string;

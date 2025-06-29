@@ -1,3 +1,4 @@
+import { AutoMap } from "@automapper/classes";
 import Notification from "../notification/notification";
 
 export default abstract class Entity {
@@ -11,6 +12,7 @@ export default abstract class Entity {
       this._notification = new Notification();
    }
 
+   @AutoMap()
    get id(): string {
       return this._id;
    }
