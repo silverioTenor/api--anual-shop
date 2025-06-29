@@ -100,7 +100,7 @@ export class User extends Entity implements IUser {
    }
 
    changePassword(password: string): void {
-      if (password.length < 5 || password.length > 20) {
+      if (password.length < 5 || password.length > 100) {
          this.notification.addError({
             context: 'User',
             message: 'Invalid password length!',

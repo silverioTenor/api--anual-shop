@@ -15,6 +15,8 @@ export default class UserFactory {
                         .withPassword(payload?.password)
                         .build(payload?.id);
 
+      user.changePassword(payload?.password);
+
       if (payload?.address) {
          user.changeAddress(payload?.address);
       }
