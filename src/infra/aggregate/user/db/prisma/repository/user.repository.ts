@@ -6,20 +6,20 @@ import AddressModel from '../model/address.model';
 
 export default class UserRepository implements IUserDBRepository {
    async create(entity: IUser): Promise<IUserDB> {
-      const data: any = { ...entity };
-
-      if (data?.address) {
-         data.address = { create: data.address };
-      }
-
       const result = await UserModel.db.create({
-         data,
-         include: { address: true },
+         data: {
+            name: entity.name,
+            email: entity.email,
+            phone: entity.phone,
+            document: entity.document,
+            password: entity.password,
+         },
+         include: { address: false },
       });
 
       return {
          ...result,
-         address: result?.address ?? undefined,
+         address: undefined,
       };
    }
 

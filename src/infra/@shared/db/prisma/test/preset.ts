@@ -48,8 +48,11 @@ export default abstract class PresetTest {
       console.log('✅ finish migrations!');
    }
 
-   static docker(cmd: string, msg: IMessage) {
+   static async docker(cmd: string, msg: IMessage) {
       console.log(msg.start);
+
+      const containerId = `${config.test.docker.containerName}-${Date.now()}`;
+      cmd = `DB_CONTAINER_NAME=${containerId} ${cmd}`;
 
       execSync(cmd);
 

@@ -1,8 +1,8 @@
-import { prisma } from '@infra/@shared/db/prisma/main';
+import UserModel from "../model/user.model";
 
 describe('Integration tests for user repository', () => {
-   test('should create an user', async () => {
-      const user = await prisma.users.create({
+   it('should create an user', async () => {
+      const user = await UserModel.db.create({
          data: {
             name: 'William Joker',
             email: 'william.j@gmail.com',
@@ -15,12 +15,12 @@ describe('Integration tests for user repository', () => {
       expect(user).toBeDefined();
       expect(user.createdAt).toBeDefined();
 
-      const foundUser = await prisma.users.findUnique({
+      const foundUser = await UserModel.db.findUnique({
          where: { id: user.id },
       });
 
       expect(foundUser).toBeDefined();
       expect(foundUser).toStrictEqual(user);
 
-   }, 6000);
+   });
 });

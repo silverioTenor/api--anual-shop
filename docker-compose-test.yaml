@@ -2,7 +2,7 @@ services:
 
   db-postgres-test:
     image: postgres:17
-    container_name: db-postgres-test
+    container_name: ${DB_CONTAINER_NAME}
     ports:
       - 5433:5432
     environment:

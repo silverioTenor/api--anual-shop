@@ -17,6 +17,7 @@ export const env = {
    DATABASE_URL: getEnv('DATABASE_URL', true),
    DATABASE_TEST_URL: getEnv('DATABASE_TEST_URL', true),
    PRISMA_MIGRATE_DEV: getEnv('PRISMA_MIGRATE_DEV', true),
+   DOCKER_CONTAINER_NAME: getEnv('DOCKER_CONTAINER_NAME') || 'db-postgres-test',
    DOCKER_COMPOSE_TEST_UP: getEnv('DOCKER_COMPOSE_TEST_UP', true),
    DOCKER_COMPOSE_TEST_DOWN: getEnv('DOCKER_COMPOSE_TEST_DOWN', true)
 }

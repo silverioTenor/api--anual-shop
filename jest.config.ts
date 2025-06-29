@@ -16,6 +16,9 @@ const config: Config = {
     '^@util/(.*)$': '<rootDir>/src/util/$1',
   },
 
+  globalSetup: '<rootDir>/src/infra/@shared/db/prisma/test/jest.global-setup.ts',
+  globalTeardown: '<rootDir>/src/infra/@shared/db/prisma/test/jest.global-teardown.ts',
+
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },

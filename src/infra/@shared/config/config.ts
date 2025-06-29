@@ -19,6 +19,7 @@ export const config = {
    },
    test: {
       docker: {
+         containerName: env.DOCKER_CONTAINER_NAME,
          up: env.DOCKER_COMPOSE_TEST_UP,
          down: env.DOCKER_COMPOSE_TEST_DOWN,
       },
