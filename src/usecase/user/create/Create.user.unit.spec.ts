@@ -24,7 +24,6 @@ describe('Unit test for User', () => {
       };
 
       const outputCreateUserDTO = await createUserUseCase.execute(input);
-      console.log('outputCreateUserDTO:: ', outputCreateUserDTO)
 
       expect(outputCreateUserDTO).toBeDefined();
       expect(outputCreateUserDTO).toStrictEqual({ id: expect.any(String) });

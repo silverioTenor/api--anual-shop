@@ -5,8 +5,8 @@
   "main": "src/infra/@shared/api/server.ts",
   "scripts": {
     "start": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules ./src/infra/@shared/api/server.ts",
-    "test": "cross-env NODE_ENV=test jest",
-    "test:check-types": "clear && npm run tsc -- --noEmit && cross-env NODE_ENV=test jest",
+    "test": "cross-env NODE_ENV=test jest --runInBand",
+    "test:check-types": "clear && npm run tsc -- --noEmit && cross-env NODE_ENV=test jest --runInBand",
     "tsc": "tsc",
     "clear": "rm -rf dist",
     "prisma:generate": "prisma generate --schema=./src/infra/@shared/db/prisma/schema.prisma",
