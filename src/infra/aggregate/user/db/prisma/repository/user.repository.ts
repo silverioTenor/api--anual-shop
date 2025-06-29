@@ -23,10 +23,13 @@ export default class UserRepository implements IUserDBRepository {
       };
    }
 
-   async update(data: any): Promise<void> {
+   async update(entity: IUser): Promise<void> {
       await UserModel.db.update({
-         data,
-         where: { id: data.id },
+         data: {
+            email: entity.email,
+            password: entity.password,
+         },
+         where: { id: entity.id },
          include: { address: true },
       });
    }
