@@ -7,7 +7,7 @@ import MapperRegistry from '../config/mapper/profile-registry.mapper';
 
 dotenv.config();
 
-MapperRegistry.registerMapping();
+MapperRegistry.regiterAll();
 
 const port = Number(config.app.port);
 

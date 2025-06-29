@@ -4,7 +4,7 @@ import MapperRegistry from '@infra/@shared/config/mapper/profile-registry.mapper
 import { prisma } from '../client';
 
 beforeAll(() => {
-   MapperRegistry.registerMapping();
+   MapperRegistry.regiterAll();
 })
 
 afterEach(async () => {
