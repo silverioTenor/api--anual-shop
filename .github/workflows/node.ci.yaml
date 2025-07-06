@@ -24,15 +24,15 @@ jobs:
 
          - name: Create .env file
            run: |
-              echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
-              echo "HOST=${{ secrets.HOST }}" >> .env
-              echo "PORT=${{ secrets.PORT }}" >> .env
-              echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
-              echo "DATABASE_TEST_URL=${{ secrets.DATABASE_TEST_URL }}" >> .env
-              echo "PRISMA_MIGRATE_DEV=${{ secrets.PRISMA_MIGRATE_DEV }}" >> .env
-              echo "DOCKER_CONTAINER_NAME=${{ secrets.DOCKER_CONTAINER_NAME }}" >> .env
-              echo "DOCKER_COMPOSE_TEST_UP=${{ secrets.DOCKER_COMPOSE_TEST_UP }}" >> .env
-              echo "DOCKER_COMPOSE_TEST_DOWN=${{ secrets.DOCKER_COMPOSE_TEST_DOWN }}" >> .env
+              echo "NODE_ENV=${{ vars.NODE_ENV }}" >> .env
+              echo "HOST=${{ vars.HOST }}" >> .env
+              echo "PORT=${{ vars.PORT }}" >> .env
+              echo "DATABASE_URL=${{ vars.DATABASE_URL }}" >> .env
+              echo "DATABASE_TEST_URL=${{ vars.DATABASE_TEST_URL }}" >> .env
+              echo "PRISMA_MIGRATE_DEV=${{ vars.PRISMA_MIGRATE_DEV }}" >> .env
+              echo "DOCKER_CONTAINER_NAME=${{ vars.DOCKER_CONTAINER_NAME }}" >> .env
+              echo "DOCKER_COMPOSE_TEST_UP=${{ vars.DOCKER_COMPOSE_TEST_UP }}" >> .env
+              echo "DOCKER_COMPOSE_TEST_DOWN=${{ vars.DOCKER_COMPOSE_TEST_DOWN }}" >> .env
 
          - run: npm i -D
          - run: npm test
