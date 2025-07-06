@@ -15,11 +15,24 @@ jobs:
 
       steps:
          - uses: actions/checkout@v4
+
          - name: Use Node.js ${{ matrix.node-version }}
            uses: actions/setup-node@v4
            with:
-               node-version: ${{ matrix.node-version }}
-               cache: 'npm'
+              node-version: ${{ matrix.node-version }}
+              cache: 'npm'
+
+         - name: Create .env file
+           run: |
+              echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
+              echo "HOST=${{ secrets.HOST }}" >> .env
+              echo "PORT=${{ secrets.PORT }}" >> .env
+              echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+              echo "DATABASE_TEST_URL=${{ secrets.DATABASE_TEST_URL }}" >> .env
+              echo "PRISMA_MIGRATE_DEV=${{ secrets.PRISMA_MIGRATE_DEV }}" >> .env
+              echo "DOCKER_CONTAINER_NAME=${{ secrets.DOCKER_CONTAINER_NAME }}" >> .env
+              echo "DOCKER_COMPOSE_TEST_UP=${{ secrets.DOCKER_COMPOSE_TEST_UP }}" >> .env
+              echo "DOCKER_COMPOSE_TEST_DOWN=${{ secrets.DOCKER_COMPOSE_TEST_DOWN }}" >> .env
+
          - run: npm i -D
-         - run: npm run build --if-present
          - run: npm test
