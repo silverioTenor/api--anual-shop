@@ -1,0 +1,39 @@
+name: Node.js CI
+
+on:
+   pull_request:
+      branches: ['develop']
+
+jobs:
+   build:
+      runs-on: ubuntu-latest
+
+      strategy:
+         matrix:
+            node-version: [20.x, 22.x]
+            # node-version: [18.x, 20.x, 22.x]
+            # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+      steps:
+         - uses: actions/checkout@v4
+
+         - name: Use Node.js ${{ matrix.node-version }}
+           uses: actions/setup-node@v4
+           with:
+              node-version: ${{ matrix.node-version }}
+              cache: 'npm'
+
+         - name: Create .env file
+           run: |
+              echo "NODE_ENV=${{ vars.NODE_ENV }}" >> .env
+              echo "HOST=${{ vars.HOST }}" >> .env
+              echo "PORT=${{ vars.PORT }}" >> .env
+              echo "DATABASE_URL=${{ vars.DATABASE_URL }}" >> .env
+              echo "DATABASE_TEST_URL=${{ vars.DATABASE_TEST_URL }}" >> .env
+              echo "PRISMA_MIGRATE_DEV=${{ vars.PRISMA_MIGRATE_DEV }}" >> .env
+              echo "DOCKER_CONTAINER_NAME=${{ vars.DOCKER_CONTAINER_NAME }}" >> .env
+              echo "DOCKER_COMPOSE_TEST_UP=${{ vars.DOCKER_COMPOSE_TEST_UP }}" >> .env
+              echo "DOCKER_COMPOSE_TEST_DOWN=${{ vars.DOCKER_COMPOSE_TEST_DOWN }}" >> .env
+
+         - run: npm i -D
+         - run: npm test
