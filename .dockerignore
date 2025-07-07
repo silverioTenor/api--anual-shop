@@ -1,0 +1,9 @@
+node_modules
+dist
+*.log
+*.ts
+cmd/
+src/
+__tests__/
+__mocks__/
+.env
