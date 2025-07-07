@@ -1,14 +1,8 @@
-FROM node:22.11
+FROM node:22-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
-
-RUN npm install
-
-# COPY wait-for.sh /wait-for.sh
-
-# RUN chmod +x /wait-for.sh
+RUN npm i -D
 
 COPY . .
 
