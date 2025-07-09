@@ -13,7 +13,7 @@
     "prisma:studio": "prisma studio --schema=./src/infra/@shared/db/prisma/schema.prisma",
     "cli": "ts-node ./cmd/cli.ts",
     "clean": "rm -rf dist",
-    "build": "echo '🔨 Compiling project...' && npm run clean && tsc --project tsconfig.build.json"
+    "build": "echo '🔨 Compiling project...' && npm run clean && tsc --project tsconfig.build.json && tsc-alias"
   },
   "repository": {
     "type": "git",
@@ -52,6 +52,7 @@
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
+    "tsc-alias": "^1.8.16",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3"
