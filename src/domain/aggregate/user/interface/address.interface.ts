@@ -7,7 +7,7 @@ export interface IAddress {
    state: string;
    country: string;
    postalCode: string;
-   notification?: Notification;
+   notification: Notification;
 }
 
 export interface IAddressDB {
