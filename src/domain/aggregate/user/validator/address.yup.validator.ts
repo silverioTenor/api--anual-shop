@@ -8,7 +8,6 @@ export default class AddressYupValidator implements IValidator<IAddress> {
       try {
          yup.object()
             .shape({
-               id: yup.string().optional(),
                userId: yup.string().required('User ID is required'),
                street: yup.string().required('Street is required'),
                city: yup.string().required('City is required'),
@@ -21,7 +20,6 @@ export default class AddressYupValidator implements IValidator<IAddress> {
             })
             .validateSync(
                {
-                  id: entity.id,
                   userId: entity.userId,
                   street: entity.street,
                   city: entity.city,
@@ -35,7 +33,7 @@ export default class AddressYupValidator implements IValidator<IAddress> {
          const e = errors as yup.ValidationError;
 
          e.errors.forEach(error => {
-            entity.notification.addError({
+            entity?.notification?.addError({
                context: 'Address',
                message: error,
             });

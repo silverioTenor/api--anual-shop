@@ -36,6 +36,7 @@ jobs:
               echo "DOCKER_COMPOSE_TEST_DOWN=${{ vars.DOCKER_COMPOSE_TEST_DOWN }}" >> .env
 
          - run: npm i -D
+         - run: npm run prisma:generate
          - run: npm test
 
          - name: Set up QEMU

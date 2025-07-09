@@ -8,12 +8,12 @@
     "test": "cross-env NODE_ENV=test jest --runInBand",
     "test:check-types": "clear && npm run tsc -- --noEmit && cross-env NODE_ENV=test jest --runInBand",
     "tsc": "tsc",
-    "clear": "rm -rf dist",
     "prisma:generate": "prisma generate --schema=./src/infra/@shared/db/prisma/schema.prisma",
     "prisma:migrate": "prisma migrate dev --schema=./src/infra/@shared/db/prisma/schema.prisma",
     "prisma:studio": "prisma studio --schema=./src/infra/@shared/db/prisma/schema.prisma",
     "cli": "ts-node ./cmd/cli.ts",
-    "build": "./build.sh"
+    "clean": "rm -rf dist",
+    "build": "echo '🔨 Compiling project...' && npm run clean && tsc --project tsconfig.build.json"
   },
   "repository": {
     "type": "git",
