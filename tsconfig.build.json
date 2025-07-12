@@ -10,15 +10,16 @@
       "noEmit": false
    },
    "include": [
-      "src/**/*.ts"
+      "src/**/*.ts",
+      "src/**/*.prisma"
    ],
    "exclude": [
       "**/*.spec.ts",
       "**/*.test.ts",
       "**/__tests__/**",
       "**/__mocks__/**",
-      "src/cli/**",
       "dist",
+      "cmd",
       "node_modules"
    ]
 }
