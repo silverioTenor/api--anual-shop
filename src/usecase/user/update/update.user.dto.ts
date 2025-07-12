@@ -4,14 +4,12 @@ export interface InputUpdateUserEmailDTO {
 }
 
 export interface InputUpdateUserAddressDTO {
-   address: {
-      userId: string;
-      street: string;
-      city: string;
-      state: string;
-      country: string;
-      postalCode: string;
-   };
+   userId: string;
+   street: string;
+   city: string;
+   state: string;
+   country: string;
+   postalCode: string;
 }
 
 export interface InputUpdateUserPasswordDTO {
