@@ -7,8 +7,10 @@ export interface IAddress {
    state: string;
    country: string;
    postalCode: string;
-   // notification?: Notification;
+   notification: Notification;
 }
+
+export interface IAddressWithoutNotification extends Omit<IAddress, 'notification'> {}
 
 export interface IAddressDB {
    userId: string;

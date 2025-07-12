@@ -33,7 +33,7 @@ export default class AddressYupValidator implements IValidator<IAddress> {
          const e = errors as yup.ValidationError;
 
          e.errors.forEach(error => {
-            entity?.notification?.addError({
+            entity.notification.addError({
                context: 'Address',
                message: error,
             });

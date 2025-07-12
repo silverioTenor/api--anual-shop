@@ -1,6 +1,5 @@
 import IUserRepository from '@domain/aggregate/user/repository/repository.interface';
 import UserFactory from '@domain/aggregate/user/factory/user.factory';
-import { IAddress } from '@domain/aggregate/user/interface/address.interface';
 import { InputUpdateUserAddressDTO } from './update.user.dto';
 
 export default class UpdateUserAddressUseCase {
