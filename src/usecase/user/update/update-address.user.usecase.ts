@@ -13,17 +13,8 @@ export default class UpdateUserAddressUseCase {
 
       const user = UserFactory.create(foundUser);
 
-      const inputAddress: IAddress = {
-         userId: input.userId,
-         street: input.street,
-         city: input.city,
-         state: input.state,
-         country: input.country,
-         postalCode: input.postalCode,
-      };
+      user.changeAddress(input);
 
-      user.changeAddress(inputAddress);
-
-      await this.userRepository.saveAddress(inputAddress);
+      await this.userRepository.saveAddress(input);
    }
 }
