@@ -15,7 +15,7 @@ export const mockProduct = {
    },
 }
 
-export const MockRepository = (): IProductRepository<any, any, any> => ({
+export const MockRepository = (): IProductRepository => ({
    create: jest.fn(),
    update: jest.fn(),
    delete: jest.fn(),
