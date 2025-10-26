@@ -21,10 +21,11 @@ export interface IProduct extends IProductProps {
 }
 
 export interface IProductDB extends Omit<IProductProps, 'notification'> {
+   active: boolean;
    userId: string;
    categoryId: string;
-   category: {
+   category?: {
       id: string;
       name: string;
-   } | undefined
+   }
 }
