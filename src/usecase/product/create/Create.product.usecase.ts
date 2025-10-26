@@ -3,7 +3,7 @@ import ProductBuilder from "@domain/aggregate/product/entity/product";
 import { InputCreateProductDTO, OutputCreateProductDTO } from "./create.product.dto";
 
 export default class CreateProductUseCase {
-   constructor(private productRepository: IProductRepository) {}
+   constructor(private productRepository: IProductRepository<any, any, any>) {}
 
    async execute(input: InputCreateProductDTO): Promise<OutputCreateProductDTO> {
       const productData = new ProductBuilder()
