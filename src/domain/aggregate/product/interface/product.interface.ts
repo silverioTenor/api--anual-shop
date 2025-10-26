@@ -1,6 +1,6 @@
-import Notification from "@domain/@shared/notification/notification";
+import Notification from "../../../@shared/notification/notification";
 
-interface IProductProps {
+export interface IProduct {
    id: string;
    name: string;
    description: string;
@@ -10,21 +10,10 @@ interface IProductProps {
    userId?: string;
    categoryId?: string;
    notification: Notification;
-}
-export interface IProduct extends IProductProps {
 
    changePrice(newPrice: number): void;
    changeQuantity(newQuantity: number): void;
    activate(): void;
    deactivate(): void;
    toString(): string;
-}
-
-export interface IProductDB extends Omit<IProductProps, 'notification'> {
-   userId: string;
-   categoryId: string;
-   category: {
-      id: string;
-      name: string;
-   } | undefined
 }

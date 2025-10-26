@@ -19,16 +19,15 @@ datasource db {
 ////////////////////////////////////////////////////
 
 model Users {
-  id        String    @id @default(uuid())
+  id        String   @id @default(uuid())
   name      String
-  email     String    @unique
+  email     String   @unique
   phone     String
-  document  String    @unique
+  document  String   @unique
   password  String
   address   Address?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  Products  Products?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("users")
 }
@@ -44,32 +43,4 @@ model Address {
   createdAt  DateTime @default(now())
 
   @@map("address")
-}
-
-model Products {
-  id          String     @id @default(uuid())
-  name        String
-  description String
-  price       Float
-  oldPrice    Float
-  quantity    Int
-  active      Boolean    @default(true)
-  userId      String     @unique
-  user        Users      @relation(fields: [userId], references: [id])
-  categoryId  String
-  category    Categories @relation(fields: [categoryId], references: [id])
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-
-  @@map("products")
-}
-
-model Categories {
-  id        String     @id @default(uuid())
-  name      String     @unique
-  Products  Products[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-
-  @@map("categories")
 }
