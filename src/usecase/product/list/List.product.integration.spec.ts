@@ -32,7 +32,7 @@ describe('Integration test for Product', () => {
       });
 
       const inputCreateProduct = {
-         name: "Product Test",
+         name: "Product Test List",
          description: "Description Test",
          oldPrice: 100,
          price: 80,
