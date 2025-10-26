@@ -15,14 +15,11 @@ export default class ProductRepository implements IProductRepository {
             categoryId: entity!.categoryId as string,
          },
          include: {
-            category: false,
+            category: true,
          },
       });
 
-      return {
-         ...result,
-         category: undefined,
-      };
+      return result;
    }
 
    async update(entity: IProduct): Promise<void> {

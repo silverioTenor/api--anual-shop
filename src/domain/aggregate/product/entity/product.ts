@@ -2,8 +2,9 @@ import Entity from '@domain/@shared/entity/entity.abstract';
 import { IProduct } from '../interface/product.interface';
 import ProductValidatorFactory from '../factory/product.validator.factory';
 import NotificationError from '../../../@shared/notification/notification.error';
+import { AutoMap } from '@automapper/classes';
 
-class Product extends Entity implements IProduct {
+export class Product extends Entity implements IProduct {
    private _name: string;
    private _description: string;
    private _oldPrice: number;
@@ -40,34 +41,42 @@ class Product extends Entity implements IProduct {
       }
    }
 
+   @AutoMap()
    get name(): string {
       return this._name;
    }
 
+   @AutoMap()
    get description(): string {
       return this._description;
    }
 
+   @AutoMap()
    get oldPrice(): number {
       return this._oldPrice;
    }
 
+   @AutoMap()
    get price(): number {
       return this._price;
    }
 
+   @AutoMap()
    get quantity(): number {
       return this._quantity;
    }
 
+   @AutoMap()
    get active() {
       return this._active;
    }
 
+   @AutoMap()
    get userId(): string {
       return this._userId || '';
    }
 
+   @AutoMap()
    get categoryId(): string {
       return this._categoryId || '';
    }
@@ -149,7 +158,7 @@ class Product extends Entity implements IProduct {
          userId: this._userId,
          categoryId: this._categoryId,
       }
-      
+
       return JSON.stringify(product, null, 3);
    }
 }
