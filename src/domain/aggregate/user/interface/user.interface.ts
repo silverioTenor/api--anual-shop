@@ -1,5 +1,5 @@
-import Notification from "../../../@shared/notification/notification";
-import { IAddress, IAddressDB } from "./address.interface";
+import Notification from "@domain/@shared/notification/notification";
+import { IAddress, IAddressDB, IAddressWithoutNotification } from "./address.interface";
 
 export interface IUser {
    id?: string;
@@ -12,7 +12,7 @@ export interface IUser {
    address: IAddress | null;
 
    changeEmail(email: string): void;
-   changeAddress(addres: IAddress): void;
+   changeAddress(addres: IAddressWithoutNotification): void;
    changePassword(password: string): void;
 }
 

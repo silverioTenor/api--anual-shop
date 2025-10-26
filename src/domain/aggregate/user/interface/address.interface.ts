@@ -10,6 +10,8 @@ export interface IAddress {
    notification: Notification;
 }
 
+export interface IAddressWithoutNotification extends Omit<IAddress, 'notification'> {}
+
 export interface IAddressDB {
    userId: string;
    street: string;
