@@ -6,14 +6,13 @@ export default class UpdateUserAddressUseCase {
    constructor(private userRepository: IUserRepository) {}
 
    async execute(input: InputUpdateUserAddressDTO) {
-      const foundUser = await this.userRepository.find(input.userId);
+      const foundUser = await this.userRepository.find(input.address.userId);
 
       if (!foundUser) throw new Error('User not found!');
 
       const user = UserFactory.create(foundUser);
+      user.changeAddress(input.address);
 
-      user.changeAddress(input);
-
-      await this.userRepository.saveAddress(input);
+      await this.userRepository.saveAddress(input.address);
    }
 }

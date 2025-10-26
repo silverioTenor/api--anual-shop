@@ -1,9 +1,0 @@
-node_modules
-__tests__/
-__mocks__/
-*.spec.ts
-*.test.ts
-.env
-*.log
-dist
-.docker

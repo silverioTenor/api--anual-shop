@@ -40,12 +40,14 @@ describe('Unit test for User usecase', () => {
       const updateAddressUseCase = new UpdateUserAddressUseCase(userMockRepository);
 
       const input = {
-         userId: userMock.id,
-         street: 'street',
-         city: 'city',
-         state: 'state',
-         country: 'country',
-         postalCode: '12345678'
+         address: {
+            userId: userMock.id,
+            street: 'street',
+            city: 'city',
+            state: 'state',
+            country: 'country',
+            postalCode: '12345678'
+         },
       };
 
       await expect(updateAddressUseCase.execute(input)).resolves.not.toThrow();
