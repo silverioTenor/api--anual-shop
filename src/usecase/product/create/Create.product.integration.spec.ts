@@ -2,7 +2,7 @@ import ProductRepository from "@infra/aggregate/product/db/prisma/repository/pro
 import UserRepository from "@infra/aggregate/user/db/prisma/repository/user.repository";
 import CreateProductUseCase from "./Create.product.usecase";
 import CreateUserUseCase from "../../user/create/Create.user.usecase";
-import CategoryModel from "@infra/aggregate/product/db/prisma/model/category.model";
+import CategoryModel from "../../../infra/aggregate/product/db/prisma/model/category.model";
 
 describe('Integration test for Product', () => {
    it('should create a product', async () => {

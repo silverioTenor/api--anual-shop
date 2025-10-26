@@ -1,12 +1,32 @@
 import IProductRepository from "@domain/aggregate/product/repository/product.interface";
 import CreateProductUseCase from "./Create.product.usecase";
-import { mockProduct, MockRepository } from "../product.seed";
+
+const mockProduct = {
+   id: crypto.randomUUID(),
+   name: "Product Test",
+   description: "Description Test",
+   oldPrice: 100,
+   price: 80,
+   quantity: 10,
+   userId: crypto.randomUUID(),
+   categoryId: crypto.randomUUID(),
+   category: {
+      id: crypto.randomUUID(),
+      name: "Category Test",
+   },
+}
+
+const MockRepository = (): IProductRepository => ({
+   create: jest.fn().mockResolvedValue(Promise.resolve({ id: mockProduct.id })),
+   update: jest.fn(),
+   delete: jest.fn(),
+   find: jest.fn(),
+   all: jest.fn(),
+});
 
 describe('Unit test for Product', () => {
    it('should create a product', async () => {
       const productRepository = MockRepository();
-      productRepository.create = jest.fn().mockReturnValue(Promise.resolve({ id: mockProduct.id }));
-
       const createProductUseCase = new CreateProductUseCase(productRepository);
 
       const output = await createProductUseCase.execute(mockProduct);
