@@ -3,7 +3,7 @@ import { InputFindProductDTO } from "./find.product.dto";
 import { OutputProductDTO } from "../product.dto";
 
 export default class FindProductUseCase {
-   constructor(private productRepository: IProductRepository<any, any, any>) {}
+   constructor(private productRepository: IProductRepository) {}
 
    async execute(input: InputFindProductDTO): Promise<OutputProductDTO> {
       const product = await this.productRepository.find(input.id);

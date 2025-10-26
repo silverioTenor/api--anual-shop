@@ -25,12 +25,12 @@ describe('Integration test for Product', () => {
 
       const category = await CategoryModel.db.create({
          data: {
-            name: 'Category Test Create',
+            name: 'Category Test',
          }
       });
 
       const inputCreateProductDTO = {
-         name: "Product Test Create",
+         name: "Product Test",
          description: "Description Test",
          oldPrice: 100,
          price: 80,

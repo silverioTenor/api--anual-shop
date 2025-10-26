@@ -2,6 +2,7 @@ import ProductRepository from "@infra/aggregate/product/db/prisma/repository/pro
 import UserRepository from "@infra/aggregate/user/db/prisma/repository/user.repository";
 import CategoryModel from "@infra/aggregate/product/db/prisma/model/category.model";
 import UpdateProductUseCase from "./Update.product.usecase";
+import { mockProduct } from "../product.seed";
 import CreateProductUseCase from "../create/Create.product.usecase";
 import CreateUserUseCase from "../../user/create/Create.user.usecase";
 
@@ -27,12 +28,12 @@ describe('Integration test for Product', () => {
 
       const category = await CategoryModel.db.create({
          data: {
-            name: 'Category Test Update',
+            name: 'Category Test',
          }
       });
 
       const inputCreateProductDTO = {
-         name: "Product Test Update",
+         name: "Product Test",
          description: "Description Test",
          oldPrice: 100,
          price: 80,

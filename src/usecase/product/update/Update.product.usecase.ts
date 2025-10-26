@@ -2,7 +2,7 @@ import IProductRepository from "@domain/aggregate/product/repository/product.int
 import { InputUpdateProductDTO } from "./update.product.dto";
 
 export default class UpdateProductUseCase {
-   constructor(private productRepository: IProductRepository<any, any, any>) {}
+   constructor(private productRepository: IProductRepository) {}
 
    async execute(input: InputUpdateProductDTO): Promise<void> {
       const foundProduct = await this.productRepository.find(input.id);
