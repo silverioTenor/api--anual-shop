@@ -29,3 +29,8 @@ export interface IProductDB extends Omit<IProductProps, 'notification'> {
       name: string;
    }
 }
+
+export interface IProductListPagination{
+   data: IProductDB[],
+   total: number
+}
