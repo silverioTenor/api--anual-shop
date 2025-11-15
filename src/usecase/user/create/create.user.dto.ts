@@ -1,9 +1,9 @@
-export interface InputCreateUserDTO {
-   name: string;
-   email: string;
-   document: string;
-   phone: string;
-   password: string;
+export class InputCreateUserDTO {
+   name!: string;
+   email!: string;
+   document!: string;
+   phone!: string;
+   password!: string;
    address?: {
       street: string;
       city: string;
@@ -13,6 +13,6 @@ export interface InputCreateUserDTO {
    }
 }
 
-export interface OutputCreateUserDTO {
-   id: string;
+export class OutputCreateUserDTO {
+   id!: string;
 }

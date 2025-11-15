@@ -1,11 +1,13 @@
 import IUserDBRepository from '@domain/aggregate/user/repository/repository.interface';
-import { IUser, IUserDB } from '@domain/aggregate/user/interface/user.interface';
+import { IUser } from '@domain/aggregate/user/interface/user.interface';
 import { IAddress } from '@domain/aggregate/user/interface/address.interface';
+import { User } from '@domain/aggregate/user/entity/user';
+import UserFactory from '@domain/aggregate/user/factory/user.factory';
 import UserModel from '../model/user.model';
 import AddressModel from '../model/address.model';
 
 export default class UserRepository implements IUserDBRepository {
-   async create(entity: IUser): Promise<IUserDB> {
+   async create(entity: IUser): Promise<User> {
       const result = await UserModel.db.create({
          data: {
             name: entity.name,
@@ -17,10 +19,7 @@ export default class UserRepository implements IUserDBRepository {
          include: { address: false },
       });
 
-      return {
-         ...result,
-         address: undefined,
-      };
+      return UserFactory.create(result);
    }
 
    async update(entity: IUser): Promise<void> {
@@ -34,31 +33,25 @@ export default class UserRepository implements IUserDBRepository {
       });
    }
 
-   async find(id: string): Promise<IUserDB | null> {
+   async find(id: string): Promise<User | null> {
       const result = await UserModel.db.findUnique({
          where: { id },
          include: { address: true },
       });
 
       return result?.id
-         ? {
-              ...result,
-              address: result?.address ?? undefined,
-           }
+         ? UserFactory.create(result)
          : null;
    }
 
-   async findByDocument(document: string): Promise<IUserDB | null> {
+   async findByDocument(document: string): Promise<User | null> {
       const result = await UserModel.db.findUnique({
          where: { document },
          include: { address: true },
       });
 
       return result?.id
-         ? {
-              ...result,
-              address: result?.address ?? undefined,
-           }
+         ? UserFactory.create(result)
          : null;
    }
 

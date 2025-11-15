@@ -1,8 +1,8 @@
 import IRepository from "@domain/@shared/repository/repository.interface";
-import { IAddressWithoutNotification } from "../interface/address.interface";
-import { IUser, IUserDB } from "../interface/user.interface";
+import { User } from "../entity/user";
+import { Address } from "../value-object/address";
 
-export default interface IUserRepository extends IRepository<IUserDB, IUser> {
-   findByDocument(document: string): Promise<IUserDB | null>;
-   saveAddress(address: IAddressWithoutNotification): Promise<void>;
+export default interface IUserRepository extends IRepository<User> {
+   findByDocument(document: string): Promise<User | null>;
+   saveAddress(address: Address): Promise<void>;
 }

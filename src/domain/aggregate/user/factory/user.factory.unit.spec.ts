@@ -1,7 +1,7 @@
 import UserFactory from './user.factory';
 
 describe('Unit tests for user factory', () => {
-   it('should create an user with null address', () => {
+   it('should create an user with undefined address', () => {
       const userRequest = {
          name: 'William Joker',
          email: 'will.j@gmail.com',
@@ -20,7 +20,7 @@ describe('Unit tests for user factory', () => {
          _phone: '21999999999',
          _password: expect.any(String),
          _document: '12345678910',
-         _address: null,
+         _address: undefined,
          _notification: {
             errors: [],
          },

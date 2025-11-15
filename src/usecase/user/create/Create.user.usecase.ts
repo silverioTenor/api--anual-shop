@@ -13,12 +13,12 @@ export default class CreateUserUseCase {
       }
 
       const user = UserFactory.create(input);
-      const userDB = await this.userRepository.create(user);
+      const newUser = await this.userRepository.create(user);
 
       if (user?.address) {
          await this.userRepository.saveAddress(user.address);
       }
 
-      return { id: userDB.id };
+      return { id: newUser.id };
    }
 }

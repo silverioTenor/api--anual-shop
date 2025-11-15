@@ -5,7 +5,7 @@ import NotificationError from '../../../@shared/notification/notification.error'
 import UserValidatorFactory from '../factory/user.validator.factory';
 import { IAddress } from '../interface/address.interface';
 import { IUser } from '../interface/user.interface';
-import AddressBuilder from '../value-object/address';
+import AddressBuilder, { Address } from '../value-object/address';
 
 export class User extends Entity implements IUser {
    private _name: string;
@@ -13,7 +13,7 @@ export class User extends Entity implements IUser {
    private _phone: string;
    private _password: string;
    private _document: string;
-   private _address!: IAddress | null;
+   private _address!: Address;
 
    constructor(
       name: string,
@@ -29,7 +29,6 @@ export class User extends Entity implements IUser {
       this._phone = phone;
       this._password = password;
       this._document = document;
-      this._address = null;
 
       this.validate();
 
@@ -63,7 +62,7 @@ export class User extends Entity implements IUser {
    }
 
    @AutoMap()
-   get address(): IAddress | null {
+   get address(): Address {
       return this._address;
    }
 
@@ -86,7 +85,7 @@ export class User extends Entity implements IUser {
       this._email = email;
    }
 
-   changeAddress(address: IAddress): void {
+   changeAddress(address: Address): void {
       const userId = address.userId || this.id;
 
       this._address = new AddressBuilder()
@@ -155,7 +154,7 @@ export class UserBuilder {
       return this;
    }
 
-   build(id?: string): IUser {
+   build(id?: string): User {
       return new User(
          this._name,
          this._email,

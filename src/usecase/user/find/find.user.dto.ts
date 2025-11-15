@@ -1,3 +1,3 @@
-export interface InputFindUserDTO {
-   id: string;
+export class InputFindUserDTO {
+   id!: string;
 }

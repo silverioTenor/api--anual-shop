@@ -1,7 +1,6 @@
 import { AutoMap } from '@automapper/classes';
 
 export class OutputUserDTO {
-  constructor() {}
 
   @AutoMap()
   public id!: string;
@@ -19,12 +18,12 @@ export class OutputUserDTO {
   public phone!: string;
 
   @AutoMap()
-  public address!: {
+  public address?: {
     userId: string;
     street: string;
     city: string;
     state: string;
     country: string;
     postalCode: string;
-  } | null;
+  };
 }
