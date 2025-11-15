@@ -1,5 +1,6 @@
 import { AutoMap } from '@automapper/classes';
 import { IProductDB } from '@domain/aggregate/product/interface/product.interface';
+import { ICategoryDB } from '@domain/aggregate/product/interface/category.interface';
 
 export class OutputProductDTO implements IProductDB {
    @AutoMap()
@@ -30,8 +31,5 @@ export class OutputProductDTO implements IProductDB {
    categoryId!: string;
 
    @AutoMap()
-   category?: {
-      id: string;
-      name: string;
-   };
+   category!: ICategoryDB;
 }
