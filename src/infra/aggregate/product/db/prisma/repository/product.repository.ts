@@ -1,7 +1,7 @@
 import IProductRepository from '@domain/aggregate/product/repository/product.interface';
 import { IProduct, IProductDB, IProductListPagination } from '@domain/aggregate/product/interface/product.interface';
 import ProductModel from '../model/product.model';
-import { InputPaginationDTO, InputProductFiltersDTO, OutputProductPaginationDTO } from '@usecase/product/list/list.product.dto';
+import { InputPaginationDTO, InputProductFiltersDTO } from '@usecase/product/list/list.product.dto';
 
 export default class ProductRepository implements IProductRepository<InputProductFiltersDTO, InputPaginationDTO, IProductListPagination> {
    async create(entity: IProduct): Promise<IProductDB> {
