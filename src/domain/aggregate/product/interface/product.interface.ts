@@ -1,4 +1,5 @@
 import Notification from "@domain/@shared/notification/notification";
+import { ICategoryDB } from "./category.interface";
 
 interface IProductProps {
    id: string;
@@ -24,13 +25,10 @@ export interface IProductDB extends Omit<IProductProps, 'notification'> {
    active: boolean;
    userId: string;
    categoryId: string;
-   category?: {
-      id: string;
-      name: string;
-   }
+   category: ICategoryDB;
 }
 
-export interface IProductListPagination{
+export interface IProductListPagination {
    data: IProductDB[],
    total: number
 }
