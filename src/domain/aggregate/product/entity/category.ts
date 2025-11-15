@@ -40,7 +40,7 @@ export default class CategoryBuilder {
       return this;
    }
 
-   build(id?: string): ICategory {
+   build(id?: string): Category {
       return new Category(this._name, id);
    }
 }

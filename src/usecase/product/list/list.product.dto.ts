@@ -1,19 +1,19 @@
 import { OutputProductDTO } from "../product.dto";
 
-export interface InputProductFiltersDTO {
+export class InputProductFiltersDTO {
    userId?: string;
    categoryId?: string;
 }
 
-export interface InputPaginationDTO {
-   page: number;
-   limit: number;
+export class InputPaginationDTO {
+   page!: number;
+   limit!: number;
 }
 
-export interface OutputProductPaginationDTO {
-   data: OutputProductDTO[];
-   total: number;
-   page: number;
-   limit: number;
-   totalPages: number;
+export class OutputProductPaginationDTO {
+   data!: OutputProductDTO[];
+   total!: number;
+   page!: number;
+   limit!: number;
+   totalPages!: number;
 }

@@ -1,19 +1,12 @@
 import IProductRepository from "@domain/aggregate/product/repository/product.interface";
-import ProductBuilder from "@domain/aggregate/product/entity/product";
 import { InputCreateProductDTO, OutputCreateProductDTO } from "./create.product.dto";
+import ProductFactory from "../../../domain/aggregate/product/factory/product.factory";
 
 export default class CreateProductUseCase {
    constructor(private productRepository: IProductRepository<any, any, any>) {}
 
    async execute(input: InputCreateProductDTO): Promise<OutputCreateProductDTO> {
-      const productData = new ProductBuilder()
-                              .withName(input.name)
-                              .withDescription(input.description)
-                              .withPrice(input.price)
-                              .withQuantity(input.quantity)
-                              .withUserId(input.userId)
-                              .withCategoryId(input.categoryId)
-                              .build();
+      const productData = ProductFactory.create(input);
 
       const product = await this.productRepository.create(productData);
 

@@ -1,10 +1,17 @@
 import IProductRepository from '@domain/aggregate/product/repository/product.interface';
-import { IProduct, IProductDB, IProductListPagination } from '@domain/aggregate/product/interface/product.interface';
+import {
+   IProduct,
+   IProductListPagination,
+} from '@domain/aggregate/product/interface/product.interface';
 import ProductModel from '../model/product.model';
 import { InputPaginationDTO, InputProductFiltersDTO } from '@usecase/product/list/list.product.dto';
+import { Product } from '@domain/aggregate/product/entity/product';
+import ProductFactory from '@domain/aggregate/product/factory/product.factory';
 
-export default class ProductRepository implements IProductRepository<InputProductFiltersDTO, InputPaginationDTO, IProductListPagination> {
-   async create(entity: IProduct): Promise<IProductDB> {
+export default class ProductRepository
+   implements IProductRepository<InputProductFiltersDTO, InputPaginationDTO, IProductListPagination>
+{
+   async create(entity: IProduct): Promise<Product> {
       const result = await ProductModel.db.create({
          data: {
             name: entity.name,
@@ -20,7 +27,7 @@ export default class ProductRepository implements IProductRepository<InputProduc
          },
       });
 
-      return result;
+      return ProductFactory.create(result);
    }
 
    async update(entity: IProduct): Promise<void> {
@@ -42,7 +49,7 @@ export default class ProductRepository implements IProductRepository<InputProduc
       });
    }
 
-   async find(id: string): Promise<IProductDB | null> {
+   async find(id: string): Promise<Product | null> {
       const result = await ProductModel.db.findUnique({
          where: { id },
          include: {
@@ -50,7 +57,7 @@ export default class ProductRepository implements IProductRepository<InputProduc
          },
       });
 
-      return result;
+      return result ? ProductFactory.create(result) : null;
    }
 
    async all(
@@ -70,11 +77,14 @@ export default class ProductRepository implements IProductRepository<InputProduc
             },
             orderBy: {
                createdAt: 'desc',
-            }
+            },
          }),
          ProductModel.db.count({}),
       ]);
 
-      return { data, total };
+      return {
+         data: data.map((item) => ProductFactory.create(item)),
+         total
+      };
    }
 }

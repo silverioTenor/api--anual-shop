@@ -1,14 +1,14 @@
-import ProductBuilder from './product';
+import { ProductBuilder } from './product';
 
 describe('Unit Test for Product', () => {
    it('should create a product', () => {
       const product = new ProductBuilder()
          .withName('Product 1')
          .withDescription('Some description')
-         .withPrice(100)
-         .withQuantity(5)
          .build();
 
+      product.changePrice(100);
+      product.changeQuantity(5);
       product.activate();
 
       expect(product).toBeDefined();
@@ -22,6 +22,7 @@ describe('Unit Test for Product', () => {
          _active: true,
          _userId: '',
          _categoryId: '',
+         _category: null,
          _notification: {
             errors: [],
          },
@@ -34,44 +35,27 @@ describe('Unit Test for Product', () => {
       );
    });
 
-   it('should throw an error when quantity is less than or equal to zero', () => {
-      expect(() =>
-         new ProductBuilder()
-            .withName('Product 1')
-            .withDescription('Some description')
-            .withQuantity(-1)
-            .build(),
-      ).toThrow('Product: quantity must be greater than or equal to 1');
-
-      expect(() =>
-         new ProductBuilder()
-            .withName('Product 1')
-            .withDescription('Some description')
-            .withQuantity(0)
-            .build(),
-      ).toThrow('Product: quantity must be greater than or equal to 1');
-   });
-
    it('should throw an error when price is less than zero', () => {
-      expect(() =>
-         new ProductBuilder()
-            .withName('Product 1')
-            .withDescription('Some description')
-            .withPrice(10)
-            .withQuantity(1)
-            .build()
-            .changePrice(-100),
-      ).toThrow('Product: price must be greater than zero');
+      const product = new ProductBuilder()
+                     .withName('Product 1')
+                     .withDescription('Some description')
+                     .build()
+
+      expect(() => {
+         product.changePrice(100);
+         product.changePrice(-100);
+         product.changeQuantity(1);
+      }).toThrow('Product: price must be greater than zero');
    });
 
    it('should throw an error when trying to activate a product with quantity less than or equal to zero', () => {
       const product = new ProductBuilder()
          .withName('Product 1')
          .withDescription('Some description')
-         .withPrice(10)
-         .withQuantity(10)
          .build();
 
+      product.changePrice(10);
+      product.changeQuantity(10);
       product.changeQuantity(0);
 
       expect(() => product.activate()).toThrow(
@@ -84,10 +68,10 @@ describe('Unit Test for Product', () => {
       const product = new ProductBuilder()
          .withName('Product 1')
          .withDescription('Some description')
-         .withPrice(10)
-         .withQuantity(1)
          .build();
 
+      product.changePrice(10);
+      product.changeQuantity(10);
       product.activate();
 
       expect(() => product.activate()).toThrow(

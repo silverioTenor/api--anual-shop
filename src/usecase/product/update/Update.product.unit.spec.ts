@@ -1,3 +1,4 @@
+import ProductFactory from "@domain/aggregate/product/factory/product.factory";
 import FindProductUseCase from "../find/Find.product.usecase";
 import { mockProduct, MockRepository } from "../product.seed";
 import UpdateProductUseCase from "./Update.product.usecase";
@@ -5,7 +6,18 @@ import UpdateProductUseCase from "./Update.product.usecase";
 describe('Unit test for Product', () => {
    it('should update a product', async () => {
       const productRepository = MockRepository();
-      productRepository.find = jest.fn().mockReturnValue(Promise.resolve(mockProduct));
+      productRepository.find = jest.fn().mockReturnValue(Promise.resolve(
+         ProductFactory.create(mockProduct)
+      ));
+
+      productRepository.update = jest.fn().mockReturnValue(Promise.resolve(
+         ProductFactory.create({
+            ...mockProduct,
+            oldPrice: mockProduct.price,
+            price: 120,
+            quantity: 9,
+         })
+      ));
 
       const updateProductUseCase = new UpdateProductUseCase(productRepository);
       const findProductUseCase = new FindProductUseCase(productRepository);

@@ -5,19 +5,13 @@ export default class UpdateProductUseCase {
    constructor(private productRepository: IProductRepository<any, any, any>) {}
 
    async execute(input: InputUpdateProductDTO): Promise<void> {
-      const foundProduct = await this.productRepository.find(input.id);
+      const product = await this.productRepository.find(input.id);
 
-      if (!foundProduct) {
-         throw new Error("Product not found");
-      }
+      if (!product) throw new Error("Product not found");
 
-      const productToUpdate = {
-         ...foundProduct,
-         price: input.price,
-         oldPrice: input.oldPrice,
-         quantity: input.quantity,
-      };
+      if (input.price) product.changePrice(input.price, product.price);
+      if (input.quantity) product.changeQuantity(input.quantity);
 
-      await this.productRepository.update(productToUpdate as any);
+      await this.productRepository.update(product);
    }
 }

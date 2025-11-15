@@ -1,5 +1,6 @@
 import Notification from "@domain/@shared/notification/notification";
-import { ICategoryDB } from "./category.interface";
+import { Product } from "../entity/product";
+import { Category } from "../entity/category";
 
 interface IProductProps {
    id: string;
@@ -13,22 +14,15 @@ interface IProductProps {
    notification: Notification;
 }
 export interface IProduct extends IProductProps {
-
    changePrice(newPrice: number): void;
    changeQuantity(newQuantity: number): void;
+   changeCategory(category: Category): void;
    activate(): void;
    deactivate(): void;
    toString(): string;
 }
 
-export interface IProductDB extends Omit<IProductProps, 'notification'> {
-   active: boolean;
-   userId: string;
-   categoryId: string;
-   category: ICategoryDB;
-}
-
 export interface IProductListPagination {
-   data: IProductDB[],
+   data: Product[],
    total: number
 }

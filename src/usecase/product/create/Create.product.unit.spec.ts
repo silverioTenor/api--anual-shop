@@ -22,6 +22,6 @@ describe('Unit test for Product', () => {
       mockProduct.price = 0;
 
       await expect(async () => await createProductUseCase.execute(mockProduct))
-      .rejects.toThrow('Product: price must be greater than or equal to 1');
+      .rejects.toThrow('Product: price must be greater than zero');
    });
 });

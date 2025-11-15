@@ -39,6 +39,7 @@ describe('Integration test for Product', () => {
          quantity: 10,
          userId: outputCreateUserDTO.id,
          categoryId: category.id,
+         category
       };
 
       const outputCreateProductDTO = await createProductUseCase.execute(inputCreateProductDTO);
@@ -46,7 +47,6 @@ describe('Integration test for Product', () => {
       const inputUpdateProductDTO = {
          id: outputCreateProductDTO.id,
          price: 120,
-         oldPrice: 80,
          quantity: 9,
       }
 
@@ -55,7 +55,7 @@ describe('Integration test for Product', () => {
       const updatedProduct = await productRepository.find(outputCreateProductDTO.id);
 
       expect(updatedProduct!.price).toBe(inputUpdateProductDTO.price);
-      expect(updatedProduct!.oldPrice).toBe(inputUpdateProductDTO.oldPrice);
+      expect(updatedProduct!.oldPrice).toBe(inputCreateProductDTO.price);
       expect(updatedProduct!.quantity).toBe(inputUpdateProductDTO.quantity);
    });
 });

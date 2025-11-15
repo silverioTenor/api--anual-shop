@@ -39,6 +39,7 @@ describe('Integration test for Product', () => {
          quantity: 10,
          userId: outputCreateUserDTO.id,
          categoryId: category.id,
+         category
       };
 
       const output = await createProductUseCase.execute(inputCreateProductDTO);

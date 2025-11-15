@@ -5,5 +5,3 @@ export interface ICategory {
    name: string;
    notification: Notification;
 }
-
-export type ICategoryDB = Omit<ICategory, 'notification'>;

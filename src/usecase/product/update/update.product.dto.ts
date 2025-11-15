@@ -1,6 +1,5 @@
-export interface InputUpdateProductDTO {
-   id: string;
+export class InputUpdateProductDTO {
+   id!: string;
    price?: number;
-   oldPrice?: number;
    quantity?: number;
 }
