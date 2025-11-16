@@ -4,7 +4,7 @@ import {
    IProductListPagination,
 } from '@domain/aggregate/product/interface/product.interface';
 import ProductModel from '../model/product.model';
-import { InputPaginationDTO, InputProductFiltersDTO } from '@usecase/product/list/list.product.dto';
+import { InputPaginationDTO, InputProductFiltersDTO } from 'application/product/list/list.product.dto';
 import { Product } from '@domain/aggregate/product/entity/product';
 import ProductFactory from '@domain/aggregate/product/factory/product.factory';
 
