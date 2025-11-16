@@ -5,18 +5,20 @@ import OrderValidatorFactory from '../factory/order-item.validator.factory copy'
 import { IOrderItem } from '../interface/order-item.interface';
 import { IOrder } from '../interface/order.interface';
 import { IPayment } from '../interface/payment.interface';
+import { Payment } from '../value-object/payment';
+import { OrderItem } from './order-item';
 
-class Order extends Entity implements IOrder {
+export class Order extends Entity implements IOrder {
    private _userId: string;
    private _status: OrderStatus;
-   private _payment: IPayment;
-   private _items: IOrderItem[];
+   private _payment: Payment;
+   private _items: OrderItem[];
 
    constructor(
       userId: string,
       status: OrderStatus,
-      payment: IPayment,
-      items: IOrderItem[],
+      payment: Payment,
+      items: OrderItem[],
       id?: string,
    ) {
       super(id);
@@ -47,7 +49,7 @@ class Order extends Entity implements IOrder {
       return this._items;
    }
 
-   addPayment(payment: IPayment): void {
+   addPayment(payment: Payment): void {
       if (!payment || Object.getOwnPropertyNames(payment).length <= 0) {
          this.notification.addError({
             context: 'Order',
@@ -69,7 +71,7 @@ class Order extends Entity implements IOrder {
       this._payment = payment;
    }
 
-   addItems(items: IOrderItem[]): void {
+   addItems(items: OrderItem[]): void {
       if (items.length === 0) {
          this.notification.addError({
             context: 'Order',
@@ -107,8 +109,8 @@ class Order extends Entity implements IOrder {
 export default class OrderBuilder {
    private _userId: string;
    private _status: OrderStatus;
-   private _payment: IPayment;
-   private _items: IOrderItem[];
+   private _payment: Payment;
+   private _items: OrderItem[];
 
    constructor() {
       this._userId = '';
@@ -125,16 +127,22 @@ export default class OrderBuilder {
       this._status = status;
       return this;
    }
-   withPayment(payment: IPayment): OrderBuilder {
+   withPayment(payment: Payment): OrderBuilder {
       this._payment = payment;
       return this;
    }
-   withItems(items: IOrderItem[]): OrderBuilder {
+   withItems(items: OrderItem[]): OrderBuilder {
       this._items = items;
       return this;
    }
 
-   build(id?: string): IOrder {
-      return new Order(this._userId, this._status, this._payment, this._items, id);
+   build(id?: string): Order {
+      return new Order(
+         this._userId,
+         this._status,
+         this._payment,
+         this._items,
+         id
+      );
    }
 }

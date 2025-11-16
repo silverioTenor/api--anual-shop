@@ -4,7 +4,7 @@ import { PaymentStatus } from '../enum/payment.enum';
 import PaymentValidatorFactory from '../factory/payment.validator.factory';
 import { IPayment, IPaymentMethod } from '../interface/payment.interface';
 
-class Payment extends ValueObject implements IPayment {
+export class Payment extends ValueObject implements IPayment {
    private _orderId: string;
    private _method: IPaymentMethod;
    private _status: PaymentStatus;
@@ -74,7 +74,7 @@ export default class PaymentBuilder {
       return this;
    }
 
-   build(): IPayment {
+   build(): Payment {
       return new Payment(this._orderId, this._method, this._status);
    }
 }
