@@ -7,7 +7,7 @@
     "paths": {
       "@domain/*": ["domain/*"],
       "@infra/*": ["infra/*"],
-      "@usecase/*": ["usecase/*"],
+      "@application/*": ["application/*"],
       "@util/*": ["util/*"]
     },
     "experimentalDecorators": true,

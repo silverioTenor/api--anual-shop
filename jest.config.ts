@@ -12,7 +12,7 @@ const config: Config = {
   moduleNameMapper: {
     '^@domain/(.*)$': '<rootDir>/src/domain/$1',
     '^@infra/(.*)$': '<rootDir>/src/infra/$1',
-    '^@usecase/(.*)$': '<rootDir>/src/usecase/$1',
+    '^@application/(.*)$': '<rootDir>/src/application/$1',
     '^@util/(.*)$': '<rootDir>/src/util/$1',
   },
 
