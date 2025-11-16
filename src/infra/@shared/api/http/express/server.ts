@@ -2,8 +2,8 @@ import 'reflect-metadata';
 
 import dotenv from 'dotenv';
 import { app } from './express';
-import { config } from '../config/config';
-import MapperRegistry from '../config/mapper/profile-registry.mapper';
+import { config } from '../../../config/config';
+import MapperRegistry from '../../../config/mapper/profile-registry.mapper';
 
 dotenv.config();
 

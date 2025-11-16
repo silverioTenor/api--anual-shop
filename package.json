@@ -4,7 +4,7 @@
   "description": "Webserver that provides resources to the frontend",
   "main": "src/infra/@shared/api/server.ts",
   "scripts": {
-    "start": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules ./src/infra/@shared/api/server.ts",
+    "start": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules ./src/infra/@shared/api/http/express/server.ts",
     "test": "cross-env NODE_ENV=test jest --runInBand",
     "test:check-types": "clear && npm run tsc -- --noEmit && cross-env NODE_ENV=test jest --runInBand",
     "tsc": "tsc",
@@ -29,6 +29,7 @@
     "dotenv": "16.5.0",
     "express": "4.21.2",
     "express-async-errors": "3.1.1",
+    "jsonwebtoken": "^9.0.2",
     "pg": "8.16.2",
     "reflect-metadata": "0.1.14",
     "yup": "1.6.1"
@@ -40,6 +41,7 @@
     "@types/bcrypt": "5.0.2",
     "@types/express": "5.0.3",
     "@types/jest": "30.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "24.0.3",
     "@types/pg": "8.15.4",
     "chalk": "5.4.1",

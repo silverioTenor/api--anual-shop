@@ -4,6 +4,8 @@
     "module": "commonjs",
     "outDir": "./dist",
     "baseUrl": "./src",
+    "typeRoots": ["./node_modules/@types", "./src"],
+    "types": ["node", "express"],
     "paths": {
       "@domain/*": ["domain/*"],
       "@infra/*": ["infra/*"],

@@ -1,5 +1,6 @@
 import IUserRepository from '@domain/aggregate/user/repository/repository.interface';
 import UserFactory from '@domain/aggregate/user/factory/user.factory';
+import { BcryptHasher } from '@infra/@shared/helper/bcrypt-hasher';
 import { InputCreateUserDTO, OutputCreateUserDTO } from './create.user.dto';
 
 export default class CreateUserUseCase {
@@ -11,6 +12,8 @@ export default class CreateUserUseCase {
       if (hasUser) {
          throw new Error('User already exists!');
       }
+
+      input.password = await BcryptHasher.hash(input.password);
 
       const user = UserFactory.create(input);
       const newUser = await this.userRepository.create(user);

@@ -9,6 +9,16 @@ export const config = {
    app: {
       port: env.PORT,
    },
+   auth: {
+      jwt: {
+         secret: env.AUTH_JWT_SECRET,
+         expiresIn: env.AUTH_JWT_EXPIRES_IN,
+         algorithm: env.AUTH_JWT_ALGORITHM,
+      },
+      bcrypt: {
+         salt: env.AUTH_BCRYPT_SALT,
+      }
+   },
    db: {
       url: nodeEnv !== 'test' ? env.DATABASE_URL : env.DATABASE_TEST_URL,
       prisma: {
