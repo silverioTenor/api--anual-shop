@@ -4,7 +4,7 @@ import ValueObject from "../../../@shared/value-object/entity.abstract";
 import AddressValidatorFactory from "../factory/address.validator.factory";
 import { IAddress } from "../interface/address.interface";
 
-class Address extends ValueObject implements IAddress {
+export class Address extends ValueObject implements IAddress {
    private _userId: string;
    private _street: string;
    private _city: string;

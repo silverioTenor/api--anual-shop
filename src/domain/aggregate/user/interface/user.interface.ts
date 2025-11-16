@@ -1,5 +1,5 @@
 import Notification from "@domain/@shared/notification/notification";
-import { IAddress, IAddressDB, IAddressWithoutNotification } from "./address.interface";
+import { Address } from "../value-object/address";
 
 export interface IUser {
    id?: string;
@@ -9,21 +9,9 @@ export interface IUser {
    password: string;
    document: string;
    notification: Notification;
-   address: IAddress | null;
+   address: Address;
 
    changeEmail(email: string): void;
-   changeAddress(addres: IAddressWithoutNotification): void;
+   changeAddress(addres: Address): void;
    changePassword(password: string): void;
-}
-
-export interface IUserDB {
-   id: string;
-   name: string;
-   email: string;
-   phone: string;
-   password: string;
-   document: string;
-   address: IAddressDB | undefined;
-   createdAt: Date;
-   updatedAt: Date;
 }

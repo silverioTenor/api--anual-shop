@@ -1,10 +1,10 @@
 import IRepository from "@domain/@shared/repository/repository.interface";
-import { IProduct, IProductDB } from "../interface/product.interface";
+import { Product } from "../entity/product";
 
-export default interface IProductRepository<T, K, V> extends IRepository<IProductDB, IProduct> {
-   create(entity: IProduct): Promise<IProductDB>;
-   update(entity: IProduct): Promise<void>;
+export default interface IProductRepository<T, K, V> extends IRepository<Product> {
+   create(entity: Product): Promise<Product>;
+   update(entity: Product): Promise<void>;
    delete(id: string): Promise<void>;
-   find(id: string): Promise<IProductDB | null>;
+   find(id: string): Promise<Product | null>;
    all(filters: T, paginationData: K): Promise<V>;
 }

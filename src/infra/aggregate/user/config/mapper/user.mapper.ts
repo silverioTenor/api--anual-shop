@@ -1,6 +1,6 @@
 import { createMap, forMember, mapFrom, MappingProfile } from '@automapper/core';
 import { User } from '@domain/aggregate/user/entity/user';
-import { OutputUserDTO } from '@usecase/user/user.dto';
+import { OutputUserDTO } from '@application/user/user.dto';
 
 export const userMapper: MappingProfile = (mapper) => {
    createMap(mapper, User, OutputUserDTO,

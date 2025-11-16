@@ -165,7 +165,7 @@ export default abstract class Generator {
 
    static async genUseCase(useCaseName: string) {
       const className = useCaseName.charAt(0).toUpperCase() + useCaseName.slice(1);
-      const useCasePath = path.resolve('src', 'usecase', useCaseName);
+      const useCasePath = path.resolve('src', 'application', useCaseName);
       const directories = ['create', 'find', 'update', 'list'];
       const fileTypeList = ['dto', 'integration', 'unit', 'usecase'];
 

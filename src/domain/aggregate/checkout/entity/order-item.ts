@@ -3,7 +3,7 @@ import NotificationError from '../../../@shared/notification/notification.error'
 import OrderItemValidatorFactory from '../factory/order-item.validator.factory';
 import { IOrderItem } from '../interface/order-item.interface';
 
-class OrderItem extends Entity implements IOrderItem {
+export class OrderItem extends Entity implements IOrderItem {
    private _orderId: string;
    private _productId: string;
    private _productName: string;
@@ -113,7 +113,7 @@ export default class OrderItemBuilder {
       return this;
    }
 
-   build(id?: string): IOrderItem {
+   build(id?: string): OrderItem {
       return new OrderItem(
          this._orderId,
          this._productId,

@@ -1,24 +1,23 @@
-import { UserBuilder } from "../entity/user";
-import { IUser } from "../interface/user.interface";
+import { User, UserBuilder } from "../entity/user";
 
 export default class UserFactory {
-   static create(payload: any): IUser {
+   static create(payload: any): User {
       if (!payload) {
          throw new Error('Invalid Data!');
       }
 
       const user = new UserBuilder()
-                        .withName(payload?.name)
-                        .withEmail(payload?.email)
-                        .withDocument(payload?.document)
-                        .withPhone(payload?.phone)
-                        .withPassword(payload?.password)
-                        .build(payload?.id);
+                        .withName(payload.name)
+                        .withEmail(payload.email)
+                        .withDocument(payload.document)
+                        .withPhone(payload.phone)
+                        .withPassword(payload.password)
+                        .build(payload.id);
 
-      user.changePassword(payload?.password);
+      user.changePassword(payload.password);
 
       if (payload?.address) {
-         user.changeAddress(payload?.address);
+         user.changeAddress(payload.address);
       }
 
       return user;

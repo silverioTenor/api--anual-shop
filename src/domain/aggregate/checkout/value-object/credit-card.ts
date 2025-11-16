@@ -3,7 +3,7 @@ import ValueObject from '../../../@shared/value-object/entity.abstract';
 import CreditCardValidatorFactory from '../factory/credit-card.validator.factory';
 import { ICreditCard } from '../interface/credit-card.interface';
 
-class CreditCard extends ValueObject implements ICreditCard {
+export class CreditCard extends ValueObject implements ICreditCard {
    private _number: string;
    private _holder: string;
    private _expiryDate: string;
@@ -130,7 +130,7 @@ export default class CreditCardBuilder {
       return this;
    }
 
-   build(): ICreditCard {
+   build(): CreditCard {
       return new CreditCard(
          this._number,
          this._holder,

@@ -1,5 +1,5 @@
-export default interface IRepository<T, K> {
-   create(entity: K): Promise<T>;
-   update(entity: K): Promise<void>;
+export default interface IRepository<T> {
+   create(entity: T): Promise<T>;
+   update(entity: T): Promise<void>;
    find(id: string): Promise<T | null>;
 }

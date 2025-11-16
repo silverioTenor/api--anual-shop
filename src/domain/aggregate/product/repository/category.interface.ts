@@ -1,10 +1,10 @@
 import IRepository from "@domain/@shared/repository/repository.interface";
-import { ICategory, ICategoryDB } from "../interface/category.interface";
+import { Category } from "../entity/category";
 
-export default interface ICategoryRepository extends Partial<IRepository<ICategoryDB, ICategory>> {
-   // create(entity: ICategory): Promise<ICategoryDB>;
+export default interface ICategoryRepository extends Partial<IRepository<Category>> {
+   // create(entity: ICategory): Promise<Category>;
    // update(entity: ICategory): Promise<void>;
    // delete(id: string): Promise<void>;
-   find(id: string): Promise<ICategoryDB | null>;
-   all(): Promise<ICategoryDB[]>;
+   find(id: string): Promise<Category | null>;
+   all(): Promise<Category[]>;
 }

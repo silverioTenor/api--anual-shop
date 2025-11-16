@@ -1,17 +1,17 @@
 import Notification from "../../../@shared/notification/notification";
+import { OrderItem } from "../entity/order-item";
 import { OrderStatus } from "../enum/order.enum";
-import { IOrderItem } from "./order-item.interface";
-import { IPayment } from "./payment.interface";
+import { Payment } from "../value-object/payment";
 
 export interface IOrder {
    id: string;
    userId: string;
    status: OrderStatus;
-   payment: IPayment;
-   items: Array<IOrderItem>;
+   payment: Payment;
+   items: Array<OrderItem>;
    notification: Notification;
-   
-   addPayment(payment: IPayment): void;
-   addItems(items: IOrderItem[]): void;
+
+   addPayment(payment: Payment): void;
+   addItems(items: OrderItem[]): void;
    total(): number;
 }

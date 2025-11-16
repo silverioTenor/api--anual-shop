@@ -3,6 +3,7 @@ import { IProduct } from '../interface/product.interface';
 import ProductValidatorFactory from '../factory/product.validator.factory';
 import NotificationError from '../../../@shared/notification/notification.error';
 import { AutoMap } from '@automapper/classes';
+import { Category } from './category';
 
 export class Product extends Entity implements IProduct {
    private _name: string;
@@ -13,6 +14,7 @@ export class Product extends Entity implements IProduct {
    private _active: boolean;
    private _userId?: string;
    private _categoryId?: string;
+   private _category: Category;
 
    constructor(
       name: string,
@@ -23,6 +25,7 @@ export class Product extends Entity implements IProduct {
       active: boolean,
       userId: string,
       categoryId: string,
+      category: Category,
       id?: string,
    ) {
       super(id);
@@ -34,6 +37,7 @@ export class Product extends Entity implements IProduct {
       this._active = active;
       this._userId = userId;
       this._categoryId = categoryId;
+      this._category = category;
       this.validate();
 
       if (this.notification?.hasErrors()) {
@@ -81,11 +85,15 @@ export class Product extends Entity implements IProduct {
       return this._categoryId || '';
    }
 
+   get category(): Category {
+      return this._category;
+   }
+
    private validate() {
       ProductValidatorFactory.create().validate(this);
    }
 
-   changePrice(price: number) {
+   changePrice(price: number, oldPrice = 0): void {
       if (price <= 0) {
          this.notification?.addError({
             context: 'Product',
@@ -95,21 +103,35 @@ export class Product extends Entity implements IProduct {
          throw new NotificationError(this.notification.getErrors());
       }
 
-      this._oldPrice = this._price;
+      this._oldPrice = oldPrice > 0 ? oldPrice : this._oldPrice;
       this._price = price;
    }
 
    changeQuantity(quantity: number): void {
-      if (quantity < 0) {
+      // if (quantity < 0) {
+      //    this.notification?.addError({
+      //       context: 'Product',
+      //       message: 'Quantity must be greater than or equal to zero',
+      //    });
+
+      //    throw new NotificationError(this.notification.getErrors());
+      // }
+
+      this._quantity = quantity;
+   }
+
+   changeCategory(category: Category): void {
+      if (!category) {
          this.notification?.addError({
             context: 'Product',
-            message: 'Quantity must be greater than or equal to zero',
+            message: 'Category must be provided',
          });
 
          throw new NotificationError(this.notification.getErrors());
       }
 
-      this._quantity = quantity;
+      this._category = category;
+      this._categoryId = category.id;
    }
 
    activate() {
@@ -163,7 +185,7 @@ export class Product extends Entity implements IProduct {
    }
 }
 
-export default class ProductBuilder {
+export class ProductBuilder {
    private _name: string;
    private _description: string;
    private _oldPrice: number;
@@ -172,16 +194,18 @@ export default class ProductBuilder {
    private _active: boolean;
    private _userId: string;
    private _categoryId: string;
+   private _category: Category;
 
    constructor() {
       this._name = '';
       this._description = '';
       this._oldPrice = 0;
-      this._price = 0;
+      this._price = 1;
       this._quantity = 0;
       this._active = false;
       this._userId = '';
       this._categoryId = '';
+      this._category = null as unknown as Category;
    }
 
    withName(name: string): ProductBuilder {
@@ -194,15 +218,15 @@ export default class ProductBuilder {
       return this;
    }
 
-   withPrice(price: number): ProductBuilder {
-      this._price = price;
-      return this;
-   }
+   // withPrice(price: number): ProductBuilder {
+   //    if (price) this._price = price;
+   //    return this;
+   // }
 
-   withQuantity(quantity: number): ProductBuilder {
-      this._quantity = quantity;
-      return this;
-   }
+   // withQuantity(quantity: number): ProductBuilder {
+   //    if (quantity) this._quantity = quantity;
+   //    return this;
+   // }
 
    withUserId(userId: string): ProductBuilder {
       this._userId = userId;
@@ -214,7 +238,12 @@ export default class ProductBuilder {
       return this;
    }
 
-   build(id?: string): IProduct {
+   withCategory(category: Category): ProductBuilder {
+      this._category = category;
+      return this;
+   }
+
+   build(id?: string): Product {
       const product = new Product(
          this._name,
          this._description,
@@ -224,6 +253,7 @@ export default class ProductBuilder {
          this._active,
          this._userId,
          this._categoryId,
+         this._category,
          id,
       );
 
