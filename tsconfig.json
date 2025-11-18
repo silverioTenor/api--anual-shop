@@ -5,7 +5,7 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "typeRoots": ["./node_modules/@types", "./src"],
-    "types": ["node", "express"],
+    "types": ["jest", "node", "express"],
     "paths": {
       "@domain/*": ["domain/*"],
       "@infra/*": ["infra/*"],
