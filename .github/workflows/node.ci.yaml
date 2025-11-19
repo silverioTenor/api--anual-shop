@@ -34,6 +34,10 @@ jobs:
               echo "DOCKER_CONTAINER_NAME=${{ vars.DOCKER_CONTAINER_NAME }}" >> .env
               echo "DOCKER_COMPOSE_TEST_UP=${{ vars.DOCKER_COMPOSE_TEST_UP }}" >> .env
               echo "DOCKER_COMPOSE_TEST_DOWN=${{ vars.DOCKER_COMPOSE_TEST_DOWN }}" >> .env
+              echo "AUTH_JWT_SECRET=${{ secrets.AUTH_JWT_SECRET }}" >> .env
+              echo "AUTH_JWT_EXPIRES_IN=${{ vars.AUTH_JWT_EXPIRES_IN }}" >> .env
+              echo "AUTH_JWT_ALGORITHM=${{ vars.AUTH_JWT_ALGORITHM }}" >> .env
+              echo "AUTH_BCRYPT_SALT=${{ vars.AUTH_BCRYPT_SALT }}" >> .env
 
          - run: npm i -D
          - run: npm run prisma:generate
