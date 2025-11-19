@@ -7,19 +7,28 @@ export default class CreateUserUseCase {
    constructor(private userRepository: IUserRepository) {}
 
    async execute(input: InputCreateUserDTO): Promise<OutputCreateUserDTO> {
-      const hasUser = await this.userRepository.findByDocument(input.document);
+      const { address, ...userProps } = input;
+
+      const hasUser = await this.userRepository.findByDocument(userProps.document);
 
       if (hasUser) {
          throw new Error('User already exists!');
       }
 
-      input.password = await BcryptHasher.hash(input.password);
+      userProps.password = await BcryptHasher.hash(userProps.password);
 
-      const user = UserFactory.create(input);
+      const user = UserFactory.create(userProps);
       const newUser = await this.userRepository.create(user);
 
-      if (user?.address) {
-         await this.userRepository.saveAddress(user.address);
+      if (address) {
+
+         newUser.changeAddress({
+            ...address,
+            userId: newUser.id
+         } as any);
+
+         await this.userRepository.saveAddress(newUser.address);
+
       }
 
       return { id: newUser.id };

@@ -5,7 +5,7 @@ export class Jwt {
    static sign(payload: object, options?: jwt.SignOptions): string {
       return jwt.sign(payload, config.auth.jwt.secret!, {
          ...options,
-         expiresIn: config.auth.jwt.expiresIn,
+         expiresIn: config.auth.jwt.expiresIn as any,
          algorithm: config.auth.jwt.algorithm as jwt.Algorithm,
       });
    }

@@ -2,7 +2,7 @@
   "name": "api--anual-shop",
   "version": "1.0.0",
   "description": "Webserver that provides resources to the frontend",
-  "main": "src/infra/@shared/api/server.ts",
+  "main": "src/infra/@shared/api/http/express/server.ts",
   "scripts": {
     "start": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules ./src/infra/@shared/api/http/express/server.ts",
     "test": "cross-env NODE_ENV=test jest --runInBand",

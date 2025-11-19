@@ -55,6 +55,17 @@ export default class UserRepository implements IUserDBRepository {
          : null;
    }
 
+   async findByEmail(email: string): Promise<User | null> {
+      const result = await UserModel.db.findUnique({
+         where: { email },
+         include: { address: true },
+      });
+
+      return result?.id
+         ? UserFactory.create(result)
+         : null;
+   }
+
    async saveAddress(address: IAddress): Promise<void> {
       const addressPayload = {
          userId: address.userId,

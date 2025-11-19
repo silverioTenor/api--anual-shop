@@ -6,6 +6,7 @@ const MockRepository = (): IUserRepository => ({
    update: jest.fn(),
    find: jest.fn(),
    findByDocument: jest.fn(),
+   findByEmail: jest.fn(),
    saveAddress: jest.fn(),
 });
 

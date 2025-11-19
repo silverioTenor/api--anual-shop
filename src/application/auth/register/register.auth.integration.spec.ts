@@ -29,7 +29,7 @@ describe('Integration test for Register', () => {
 
       expect(output).toHaveProperty('user');
       expect(output.user).toHaveProperty('id');
-      expect(output).toHaveProperty('access_token');
+      expect(output).toHaveProperty('accessToken');
       expect(spyJwtSign).toHaveBeenCalledTimes(1);
       expect(spySaveAddress).toHaveBeenCalledTimes(1);
    });
@@ -53,7 +53,7 @@ describe('Integration test for Register', () => {
 
       expect(output).toHaveProperty('user');
       expect(output.user).toHaveProperty('id');
-      expect(output).toHaveProperty('access_token');
+      expect(output).toHaveProperty('accessToken');
       expect(spyJwtSign).toHaveBeenCalledTimes(1);
    });
 

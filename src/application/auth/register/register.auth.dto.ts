@@ -17,5 +17,5 @@ export class OutputRegisterDTO {
    user!: {
       id: string;
    };
-   access_token!: string;
+   accessToken!: string;
 }

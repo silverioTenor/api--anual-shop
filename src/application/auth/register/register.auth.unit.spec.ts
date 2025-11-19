@@ -33,6 +33,7 @@ const MockRepository = (): IUserRepository => ({
    update: jest.fn(),
    find: jest.fn(),
    findByDocument: jest.fn(),
+   findByEmail: jest.fn(),
    saveAddress: jest.fn(),
 });
 
@@ -47,7 +48,7 @@ describe('Unit test for Register', () => {
 
       expect(output).toHaveProperty('user');
       expect(output.user).toHaveProperty('id');
-      expect(output).toHaveProperty('access_token');
+      expect(output).toHaveProperty('accessToken');
       expect(userRepository.create).toHaveBeenCalled();
       expect(userRepository.saveAddress).toHaveBeenCalled();
       expect(spyJwtSign).toHaveBeenCalledTimes(1);

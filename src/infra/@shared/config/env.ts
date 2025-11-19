@@ -15,7 +15,7 @@ export const env = {
    HOST: getEnv('HOST') || 'localhost',
    PORT: getEnv('PORT') || 3000,
    AUTH_JWT_SECRET: getEnv('AUTH_JWT_SECRET', true),
-   AUTH_JWT_EXPIRES_IN: Number(getEnv('AUTH_JWT_EXPIRES_IN')) || 1,
+   AUTH_JWT_EXPIRES_IN: getEnv('AUTH_JWT_EXPIRES_IN') || '1h',
    AUTH_JWT_ALGORITHM: getEnv('AUTH_JWT_ALGORITHM') || 'HS256',
    AUTH_BCRYPT_SALT: Number(getEnv('AUTH_BCRYPT_SALT')) || 10,
    DATABASE_URL: getEnv('DATABASE_URL', true),

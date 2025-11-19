@@ -24,7 +24,7 @@ export default class RegisterUseCase {
       if (address) {
 
          newUser.changeAddress({
-            ...address!,
+            ...address,
             userId: newUser.id
          } as any);
 
@@ -36,7 +36,7 @@ export default class RegisterUseCase {
 
       return {
          user: { id: newUser.id },
-         access_token: token,
+         accessToken: token,
       };
    }
 }

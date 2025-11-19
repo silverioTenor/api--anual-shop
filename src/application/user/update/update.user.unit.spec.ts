@@ -18,6 +18,7 @@ const MockRepository = () => ({
    find: jest.fn().mockReturnValue(Promise.resolve(user)),
    update: jest.fn().mockReturnValue(Promise.resolve()),
    findByDocument: jest.fn(),
+   findByEmail: jest.fn(),
    saveAddress: jest.fn().mockReturnValue(Promise.resolve()),
 });
 
