@@ -79,11 +79,7 @@ describe('Unit tests for User entity', () => {
 
       user.changePassword('123abc');
 
-      let passwordMatch = bcrypt.compareSync('abc123', user.password);
-      expect(passwordMatch).toBe(false);
-
-      passwordMatch = bcrypt.compareSync('123abc', user.password);
-      expect(passwordMatch).toBe(true);
+      expect(user.password).toBe('123abc');
    });
 
    it('should throw an error when change password with invalid length', () => {

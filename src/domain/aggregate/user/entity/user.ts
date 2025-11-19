@@ -108,9 +108,7 @@ export class User extends Entity implements IUser {
          throw new NotificationError(this.notification.getErrors());
       }
 
-      const passwordHashed = bcrypt.hashSync(password, 10);
-
-      this._password = passwordHashed;
+      this._password = password;
    }
 }
 

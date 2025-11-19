@@ -1,30 +1,30 @@
 import type { Config } from 'jest';
 
 const config: Config = {
-  clearMocks: true,
+   clearMocks: true,
 
-  coverageDirectory: './coverage',
-  coverageProvider: 'v8',
-  coverageReporters: ['text', 'lcov'],
+   coverageDirectory: './coverage',
+   coverageProvider: 'v8',
+   coverageReporters: ['text', 'lcov'],
 
-  testEnvironment: 'node',
+   testEnvironment: 'node',
 
-  moduleNameMapper: {
-    '^@domain/(.*)$': '<rootDir>/src/domain/$1',
-    '^@infra/(.*)$': '<rootDir>/src/infra/$1',
-    '^@application/(.*)$': '<rootDir>/src/application/$1',
-    '^@util/(.*)$': '<rootDir>/src/util/$1',
-  },
+   moduleNameMapper: {
+      '^@domain/(.*)$': '<rootDir>/src/domain/$1',
+      '^@infra/(.*)$': '<rootDir>/src/infra/$1',
+      '^@application/(.*)$': '<rootDir>/src/application/$1',
+      '^@util/(.*)$': '<rootDir>/src/util/$1',
+   },
 
-  setupFilesAfterEnv: ['<rootDir>/src/infra/@shared/db/prisma/test/jest.setup.ts'],
-  globalSetup: '<rootDir>/src/infra/@shared/db/prisma/test/jest.global-setup.ts',
-  globalTeardown: '<rootDir>/src/infra/@shared/db/prisma/test/jest.global-teardown.ts',
+   setupFilesAfterEnv: ['<rootDir>/src/infra/@shared/db/prisma/test/jest.setup.ts'],
+   globalSetup: '<rootDir>/src/infra/@shared/db/prisma/test/jest.global-setup.ts',
+   globalTeardown: '<rootDir>/src/infra/@shared/db/prisma/test/jest.global-teardown.ts',
 
-  transform: {
-    '^.+\\.(t|j)sx?$': '@swc/jest',
-  },
+   transform: {
+      '^.+\\.(t|j)sx?$': '@swc/jest',
+   },
 
-  testPathIgnorePatterns: ['/node_modules/', '/dist/'],
+   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
 };
 
 export default config;
