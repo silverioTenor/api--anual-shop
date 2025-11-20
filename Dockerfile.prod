@@ -12,6 +12,12 @@ RUN npm install
 # Copy the rest of the project
 COPY . .
 
+# Generate API docs
+RUN npm run doc:generate
+
+# Copy the rest of the project
+COPY . .
+
 # Generate prisma client
 RUN npm run prisma:generate
 
@@ -27,7 +33,7 @@ WORKDIR /app
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
-# COPY --from=builder /app/.env ./.env
+COPY --from=builder /app/tsoa.json ./tsoa.json
 
 # Define the command for initialization
-CMD ["node", "dist/infra/@shared/api/server.js"]
+CMD ["node", "dist/infra/@shared/api/http/express/server.js"]

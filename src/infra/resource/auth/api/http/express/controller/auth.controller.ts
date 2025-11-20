@@ -1,28 +1,32 @@
-import { Request, Response } from 'express';
+import { Body, Post, Response, Route, Tags } from 'tsoa';
+
 import RegisterUseCase from '@application/auth/register/register.auth.usecase';
 import LoginUseCase from '@application/auth/login/login.auth.usecase';
 import UserRepository from '@infra/aggregate/user/db/prisma/repository/user.repository';
+import { InputLoginDTO, OutputLoginDTO } from '@application/auth/login/login.auth.dto';
+import { InputRegisterDTO, OutputRegisterDTO } from '@application/auth/register/register.auth.dto';
 
-export default abstract class AuthController {
-   static async signup(req: Request, res: Response) {
-      const registerUsecase = new RegisterUseCase(new UserRepository());
-      const output = await registerUsecase.execute(req.body);
+@Route('/auth')
+@Tags('Auth')
+export class AuthController {
 
-      return res.status(201).json(output);
+   @Post('/sign-up')
+   @Response<OutputRegisterDTO>(201, 'Created')
+   async signup(@Body() inputRegisterDTO: InputRegisterDTO): Promise<OutputRegisterDTO> {
+      return await new RegisterUseCase(new UserRepository()).execute(inputRegisterDTO);
    }
 
-   static async signin(req: Request, res: Response) {
-      const logingUsecase = new LoginUseCase(new UserRepository());
-      const output = await logingUsecase.execute(req.body);
-
-      return res.status(200).json(output);
+   @Post('/sign-in')
+   @Response<OutputLoginDTO>(200, 'OK')
+   async signin(@Body() inputLoginDTO: InputLoginDTO): Promise<OutputLoginDTO> {
+      return await new LoginUseCase(new UserRepository()).execute(inputLoginDTO);
    }
 
-   static async recoveryPass(req: Request, res: Response) {
-      throw new Error('method not implemented yet!');
-   }
+   // async recoveryPass() {
+   //    throw new Error('method not implemented yet!');
+   // }
 
-   static async suspend(req: Request, res: Response) {
-      throw new Error('method not implemented yet!');
-   }
+   // async suspend() {
+   //    throw new Error('method not implemented yet!');
+   // }
 }

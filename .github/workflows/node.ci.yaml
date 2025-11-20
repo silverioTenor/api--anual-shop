@@ -40,6 +40,7 @@ jobs:
               echo "AUTH_BCRYPT_SALT=${{ vars.AUTH_BCRYPT_SALT }}" >> .env
 
          - run: npm i -D
+         - run: npm run doc:generate
          - run: npm run prisma:generate
          - run: npm test
 

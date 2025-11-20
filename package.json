@@ -4,6 +4,9 @@
   "description": "Webserver that provides resources to the frontend",
   "main": "src/infra/@shared/api/http/express/server.ts",
   "scripts": {
+    "tsoa:spec": "tsoa spec",
+    "tsoa:routes": "tsoa routes",
+    "doc:generate": "npm run tsoa:spec && npm run tsoa:routes",
     "start": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules ./src/infra/@shared/api/http/express/server.ts",
     "test": "cross-env NODE_ENV=test jest --runInBand",
     "test:check-types": "clear && npm run tsc -- --noEmit && cross-env NODE_ENV=test jest --runInBand",
@@ -25,6 +28,8 @@
     "@automapper/classes": "8.8.1",
     "@automapper/core": "8.8.1",
     "@prisma/client": "6.10.1",
+    "@scalar/express-api-reference": "^0.8.25",
+    "@scalar/openapi-parser": "^0.23.3",
     "bcrypt": "6.0.0",
     "dotenv": "16.5.0",
     "express": "4.21.2",
@@ -32,6 +37,7 @@
     "jsonwebtoken": "^9.0.2",
     "pg": "8.16.2",
     "reflect-metadata": "0.1.14",
+    "tsoa": "^6.6.0",
     "yup": "1.6.1"
   },
   "devDependencies": {

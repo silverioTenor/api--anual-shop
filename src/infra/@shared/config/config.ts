@@ -8,6 +8,8 @@ export const config = {
    env: nodeEnv,
    app: {
       port: env.PORT,
+      host: env.HOST,
+      protocol: env.PROTOCOL,
    },
    auth: {
       jwt: {

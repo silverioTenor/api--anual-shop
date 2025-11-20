@@ -1,0 +1,28 @@
+{
+   "entryFile": "src/infra/@shared/api/http/express/server.ts",
+   "noImplicitAdditionalProperties": "throw-on-extras",
+   "controllerPathGlobs": [
+      "src/infra/**/controller/*.ts"
+   ],
+   "spec": {
+      "outputDirectory": "src/infra/@shared/api/http/express/openapi",
+      "specVersion": 3,
+      "basePath": "/",
+      "securityDefinitions": {},
+      "schemes": [
+         "http"
+      ]
+   },
+   "routes": {
+      "routesDir": "src/infra/@shared/api/http/express/routes"
+   },
+   "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@domain/*": ["domain/*"],
+      "@application/*": ["application/*"],
+      "@infra/*": ["infra/*"],
+      "@util/*": ["util/*"]
+    }
+  }
+}
