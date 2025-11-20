@@ -38,6 +38,7 @@
     "pg": "8.16.2",
     "reflect-metadata": "0.1.14",
     "tsoa": "^6.6.0",
+    "tsyringe": "^4.10.0",
     "yup": "1.6.1"
   },
   "devDependencies": {

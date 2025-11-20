@@ -3,9 +3,15 @@ import IUserRepository from "@domain/aggregate/user/repository/repository.interf
 import { BcryptHasher } from "@infra/@shared/helper/bcrypt-hasher";
 import { Jwt } from "@infra/@shared/helper/jwt";
 import { InputRegisterDTO, OutputRegisterDTO } from "./register.auth.dto";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export default class RegisterUseCase {
-   constructor(private userRepository: IUserRepository) {}
+
+   constructor(
+      @inject('UserRepository')
+      private readonly userRepository: IUserRepository
+   ) {}
 
    async execute(input: InputRegisterDTO): Promise<OutputRegisterDTO> {
       const { address, ...userProps } = input;

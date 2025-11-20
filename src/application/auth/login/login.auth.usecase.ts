@@ -6,9 +6,15 @@ import { BcryptHasher } from "@infra/@shared/helper/bcrypt-hasher";
 import { Jwt } from "@infra/@shared/helper/jwt";
 import { InputLoginDTO, OutputLoginDTO } from "./login.auth.dto";
 import { OutputUserDTO } from "../../user/user.dto";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export default class LoginUseCase {
-   constructor(private userRepository: IUserRepository) {}
+
+   constructor(
+      @inject('UserRepository')
+      private readonly userRepository: IUserRepository
+   ) {}
 
    async execute({ email, password }: InputLoginDTO): Promise<OutputLoginDTO> {
       const foundUser = await this.userRepository.findByEmail(email);

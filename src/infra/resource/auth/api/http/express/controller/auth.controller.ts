@@ -1,25 +1,35 @@
-import { Body, Post, Response, Route, Tags } from 'tsoa';
+import { Body, Controller, Post, Response, Route, Tags } from 'tsoa';
 
 import RegisterUseCase from '@application/auth/register/register.auth.usecase';
 import LoginUseCase from '@application/auth/login/login.auth.usecase';
-import UserRepository from '@infra/aggregate/user/db/prisma/repository/user.repository';
 import { InputLoginDTO, OutputLoginDTO } from '@application/auth/login/login.auth.dto';
 import { InputRegisterDTO, OutputRegisterDTO } from '@application/auth/register/register.auth.dto';
+import { inject, injectable } from 'tsyringe';
 
 @Route('/auth')
 @Tags('Auth')
-export class AuthController {
+@injectable()
+export class AuthController extends Controller {
+
+   constructor(
+      @inject('RegisterUseCase')
+      private readonly registerUseCase: RegisterUseCase,
+      @inject('LoginUseCase')
+      private readonly loginUseCase: LoginUseCase,
+   ) {
+      super();
+   }
 
    @Post('/sign-up')
    @Response<OutputRegisterDTO>(201, 'Created')
    async signup(@Body() inputRegisterDTO: InputRegisterDTO): Promise<OutputRegisterDTO> {
-      return await new RegisterUseCase(new UserRepository()).execute(inputRegisterDTO);
+      return await this.registerUseCase.execute(inputRegisterDTO);
    }
 
    @Post('/sign-in')
    @Response<OutputLoginDTO>(200, 'OK')
    async signin(@Body() inputLoginDTO: InputLoginDTO): Promise<OutputLoginDTO> {
-      return await new LoginUseCase(new UserRepository()).execute(inputLoginDTO);
+      return await this.loginUseCase.execute(inputLoginDTO);
    }
 
    // async recoveryPass() {
