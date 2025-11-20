@@ -9,6 +9,9 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+# Generate API docs
+RUN npm run doc:generate
+
 # Copy the rest of the project
 COPY . .
 
@@ -30,4 +33,4 @@ COPY --from=builder /app/dist ./dist
 # COPY --from=builder /app/.env ./.env
 
 # Define the command for initialization
-CMD ["node", "dist/infra/@shared/api/server.js"]
+CMD ["node", "dist/infra/@shared/api/http/express/server.js"]

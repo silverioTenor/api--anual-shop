@@ -14,6 +14,7 @@ export const env = {
    NODE_ENV: getEnv('NODE_ENV') || 'development',
    HOST: getEnv('HOST') || 'localhost',
    PORT: getEnv('PORT') || 3000,
+   PROTOCOL: getEnv('PROTOCOL') || 'http',
    AUTH_JWT_SECRET: getEnv('AUTH_JWT_SECRET', true),
    AUTH_JWT_EXPIRES_IN: getEnv('AUTH_JWT_EXPIRES_IN') || '1h',
    AUTH_JWT_ALGORITHM: getEnv('AUTH_JWT_ALGORITHM') || 'HS256',

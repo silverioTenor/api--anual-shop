@@ -1,0 +1,275 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"OutputRegisterDTO": {
+				"properties": {
+					"user": {
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"id"
+						],
+						"type": "object"
+					},
+					"accessToken": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"user",
+					"accessToken"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"InputRegisterDTO": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"document": {
+						"type": "string"
+					},
+					"address": {
+						"properties": {
+							"country": {
+								"type": "string"
+							},
+							"postalCode": {
+								"type": "string"
+							},
+							"state": {
+								"type": "string"
+							},
+							"city": {
+								"type": "string"
+							},
+							"street": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"country",
+							"postalCode",
+							"state",
+							"city",
+							"street"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"name",
+					"email",
+					"password",
+					"phone",
+					"document"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"OutputUserDTO": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"document": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"address": {
+						"properties": {
+							"postalCode": {
+								"type": "string"
+							},
+							"country": {
+								"type": "string"
+							},
+							"state": {
+								"type": "string"
+							},
+							"city": {
+								"type": "string"
+							},
+							"street": {
+								"type": "string"
+							},
+							"userId": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"postalCode",
+							"country",
+							"state",
+							"city",
+							"street",
+							"userId"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"email",
+					"document",
+					"phone"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"OutputLoginDTO": {
+				"properties": {
+					"user": {
+						"$ref": "#/components/schemas/OutputUserDTO"
+					},
+					"accessToken": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"user",
+					"accessToken"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"InputLoginDTO": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "api--anual-shop",
+		"version": "1.0.0",
+		"description": "Webserver that provides resources to the frontend",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Rodrigo Silvério"
+		}
+	},
+	"paths": {
+		"/auth/sign-up": {
+			"post": {
+				"operationId": "Signup",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/OutputRegisterDTO"
+								}
+							}
+						}
+					},
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/OutputRegisterDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/InputRegisterDTO"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/sign-in": {
+			"post": {
+				"operationId": "Signin",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/OutputLoginDTO"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/InputLoginDTO"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
