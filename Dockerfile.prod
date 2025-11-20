@@ -30,7 +30,7 @@ WORKDIR /app
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
-# COPY --from=builder /app/.env ./.env
+COPY --from=builder /app/tsoa.json ./tsoa.json
 
 # Define the command for initialization
 CMD ["node", "dist/infra/@shared/api/http/express/server.js"]
