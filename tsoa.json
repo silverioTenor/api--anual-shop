@@ -14,7 +14,8 @@
       ]
    },
    "routes": {
-      "routesDir": "src/infra/@shared/api/http/express/routes"
+      "routesDir": "src/infra/@shared/api/http/express/routes",
+      "iocModule": "src/infra/@shared/provider/ioc"
    },
    "compilerOptions": {
     "baseUrl": "src",

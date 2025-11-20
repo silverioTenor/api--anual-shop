@@ -1,4 +1,6 @@
 import 'reflect-metadata';
+import '@infra/@shared/provider/ioc';
+import '@infra/@shared/provider/tsyringe-container';
 
 import dotenv from 'dotenv';
 import { app } from './express';
