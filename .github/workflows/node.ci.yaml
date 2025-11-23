@@ -38,6 +38,10 @@ jobs:
               echo "AUTH_JWT_EXPIRES_IN=${{ vars.AUTH_JWT_EXPIRES_IN }}" >> .env
               echo "AUTH_JWT_ALGORITHM=${{ vars.AUTH_JWT_ALGORITHM }}" >> .env
               echo "AUTH_BCRYPT_SALT=${{ vars.AUTH_BCRYPT_SALT }}" >> .env
+              echo "MAILTRAP_API_KEY=${{ secrets.MAILTRAP_API_KEY }}" >> .env
+              echo "MAILTRAP_USE_SANDBOX=${{ vars.MAILTRAP_USE_SANDBOX }}" >> .env
+              echo "MAILTRAP_INBOX_ID=${{ secrets.MAILTRAP_INBOX_ID }}" >> .env
+              echo "MAILTRAP_SENDER=${{ vars.MAILTRAP_SENDER }}" >> .env
 
          - run: npm i -D
          - run: npm run doc:generate
