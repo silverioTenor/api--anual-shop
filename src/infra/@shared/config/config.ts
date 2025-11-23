@@ -10,6 +10,7 @@ export const config = {
       port: env.PORT,
       host: env.HOST,
       protocol: env.PROTOCOL,
+      url: env.APP_URL,
    },
    auth: {
       jwt: {
@@ -35,5 +36,11 @@ export const config = {
          up: env.DOCKER_COMPOSE_TEST_UP,
          down: env.DOCKER_COMPOSE_TEST_DOWN,
       },
+   },
+   mailtrap: {
+      apiKey: env.MAILTRAP_API_KEY,
+      useSandbox: env.MAILTRAP_USE_SANDBOX,
+      inboxId: env.MAILTRAP_INBOX_ID,
+      sender: env.MAILTRAP_SENDER,
    },
 };
