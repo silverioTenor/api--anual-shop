@@ -1,10 +1,11 @@
+import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../client';
 import { config } from '@infra/@shared/config/config';
 
-export const prisma = new PrismaClient({
-   datasources: {
-      db: {
-         url: config.db.url,
-      },
-   },
+const adapter = new PrismaPg({
+   connectionString: config.db.url,
 });
+
+const prisma = new PrismaClient({ adapter });
+
+export { prisma };
