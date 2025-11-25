@@ -18,6 +18,9 @@ RUN npm run doc:generate
 # Copy the rest of the project
 COPY . .
 
+# To escape validation for required variables
+ENV NODE_ENV=build
+
 # Generate prisma client
 RUN npm run prisma:generate
 
@@ -34,6 +37,8 @@ COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/tsoa.json ./tsoa.json
+
+ENV NODE_ENV=production
 
 EXPOSE 3333
 

@@ -3,10 +3,13 @@ import 'dotenv/config';
 const getEnv = (key: string, required = false) => {
    const envVar = process.env[key];
 
-   if (!envVar && required) throw new Error(`Environment variable ${key} is not defined!`);
+   const isRuntime = process.env.NODE_ENV !== 'build';
+
+   if (!envVar && required && isRuntime)
+      throw new Error(`Environment variable ${key} is not defined!`);
 
    return envVar;
-}
+};
 
 export const env = {
    NODE_ENV: getEnv('NODE_ENV') || 'development',
@@ -32,5 +35,5 @@ export const env = {
    MAILTRAP_API_KEY: getEnv('MAILTRAP_API_KEY', true),
    MAILTRAP_USE_SANDBOX: Boolean(getEnv('MAILTRAP_USE_SANDBOX')),
    MAILTRAP_INBOX_ID: Number(getEnv('MAILTRAP_INBOX_ID')) || 0,
-   MAILTRAP_SENDER: getEnv('MAILTRAP_SENDER') || 'no-reply@example.com'
-}
+   MAILTRAP_SENDER: getEnv('MAILTRAP_SENDER') || 'no-reply@example.com',
+};

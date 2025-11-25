@@ -1,6 +1,6 @@
 import { env } from './env';
 
-type Environment = 'development' | 'production' | 'test';
+type Environment = 'development' | 'production' | 'test' | 'build';
 
 const nodeEnv = env.NODE_ENV as Environment;
 
