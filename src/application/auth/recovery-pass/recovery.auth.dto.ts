@@ -1,2 +1,7 @@
-export class InputRecoveryPassDTO {}
-export class OutputRecoveryPassDTO {}
+export class InputRecoveryPassDTO {
+   email!: string;
+}
+
+export class OutputRecoveryPassDTO {
+   message!: string;
+}

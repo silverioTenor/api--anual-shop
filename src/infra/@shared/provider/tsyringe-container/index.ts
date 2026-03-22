@@ -16,6 +16,7 @@ import FindProductUseCase from '@application/product/find/Find.product.usecase';
 import ListProductUseCase from '@application/product/list/List.product.usecase';
 import UpdateProductUseCase from '@application/product/update/Update.product.usecase';
 import { AuthController } from '@infra/resource/auth/api/http/express/controller/auth.controller';
+import { MailProvider } from '@infra/provider/mail/mailtrap/mail-provider';
 
 // import UserController from '../../../aggregate/user/api/controller/user.controller';
 // import ProductController from '../../../aggregate/product/api/controller/product.controller';
@@ -47,9 +48,13 @@ container.registerSingleton<CreateProductUseCase>('CreateProductUseCase', Create
 container.registerSingleton<FindProductUseCase>('FindProductUseCase', FindProductUseCase);
 container.registerSingleton<ListProductUseCase>('ListProductUseCase', ListProductUseCase);
 container.registerSingleton<UpdateProductUseCase>('UpdateProductUseCase', UpdateProductUseCase);
+container.registerSingleton<RecoveryPassUseCase>('RecoveryPassUseCase', RecoveryPassUseCase);
 
 // CONTROLLERS
 container.registerSingleton<AuthController>('AuthController', AuthController);
 // container.registerSingleton<UserController>('UserController', UserController);
 // container.registerSingleton<ProductController>('ProductController', ProductController);
 // container.registerSingleton<CheckoutController>('CheckoutController', CheckoutController);
+
+// PROVIDERS
+container.registerSingleton('MailProvider', MailProvider);

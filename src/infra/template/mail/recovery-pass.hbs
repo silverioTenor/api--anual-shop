@@ -1,0 +1,41 @@
+<html lang='en'>
+   <head>
+      <meta charset='UTF-8' />
+      <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+      <title>Document</title>
+      <style
+      >
+         body {
+            font-family: {{{styles.fontFamily}}};
+            color: {{{styles.color}}};
+            background-color: {{{styles.backgroundColor}}};
+         }
+      </style>
+   </head>
+   <body>
+      <div style='padding: 24px;'>
+         <h2>{{body.title}}</h2>
+
+         <p>Olá <strong>{{body.userName}}</strong>,</p>
+
+         <p>{{body.message}}</p>
+
+         <div style='text-align: center; margin: 32px 0;'>
+            <a
+               href='{{body.buttonLink}}'
+               style='
+          background-color: {{{styles.buttonColor}}};
+          color: {{{styles.buttonTextColor}}};
+          padding: 12px 24px;
+          text-decoration: none;
+          font-weight: bold;
+          border-radius: 6px;
+        '
+            >
+               {{body.buttonText}}
+            </a>
+         </div>
+      </div>
+
+   </body>
+</html>
